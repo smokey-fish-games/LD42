@@ -34,3 +34,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/Assets/Plugins/GitHub/Editor/big-logo@2x.png.meta
