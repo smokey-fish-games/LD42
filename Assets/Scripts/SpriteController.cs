@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class SpriteController : MonoBehaviour
 {
 
     public enum DIRECTION { UP, DOWN, LEFT, RIGHT, UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT };
@@ -10,54 +10,51 @@ public class CharacterController : MonoBehaviour
     public bool MOVEDOWN = false;
     public bool MOVELEFT = false;
     public bool MOVERIGHT = false;
-    public float speed = 0.5f;
+    public float speed = 10f;
 
     public void Move(DIRECTION direction)
     {
-        Vector2 currentPos = transform.position;
         Vector2 newpos = new Vector2();
-        float dirMove = (speed * Time.deltaTime) / 2;
         switch (direction)
         {
             case DIRECTION.UP:
                 Debug.Log("Moving up!");
-                newpos = currentPos + new Vector2(0, speed * Time.deltaTime);
+                newpos = Vector2.up;
                 break;
             case DIRECTION.DOWN:
                 Debug.Log("Moving Down!");
-                newpos = currentPos + new Vector2(0, -speed * Time.deltaTime);
+                newpos = Vector2.down;
                 break;
             case DIRECTION.LEFT:
                 Debug.Log("Moving Left!");
-                newpos = currentPos + new Vector2(-speed * Time.deltaTime, 0);
+                newpos = Vector2.left;
                 break;
             case DIRECTION.RIGHT:
                 Debug.Log("Moving Right!");
-                newpos = currentPos + new Vector2(speed * Time.deltaTime, 0);
+                newpos = Vector2.right;
                 break;
 
             case DIRECTION.UPLEFT:
                 Debug.Log("Moving up Left!");
-                newpos = currentPos + new Vector2(-dirMove, dirMove);
+                newpos = Vector2.up + Vector2.left;
                 break;
             case DIRECTION.UPRIGHT:
                 Debug.Log("Moving Up Right!");
-                newpos = currentPos + new Vector2(dirMove, dirMove);
+                newpos = Vector2.up + Vector2.right;
                 break;
             case DIRECTION.DOWNLEFT:
                 Debug.Log("Moving Down Left!");
-                newpos = currentPos + new Vector2(-dirMove, -dirMove);
+                newpos = Vector2.down + Vector2.left;
                 break;
             case DIRECTION.DOWNRIGHT:
                 Debug.Log("Moving Down Right!");
-                newpos = currentPos + new Vector2(dirMove, -dirMove);
+                newpos = Vector2.down + Vector2.left;
                 break;
-
             default:
                 Debug.Log("TODO " + direction);
                 break;
         }
-        transform.position = newpos;
+        transform.Translate(newpos * Time.deltaTime * speed);
     }
 
 
