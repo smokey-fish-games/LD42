@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
+using System.Linq;
+
 public class BoardManager : MonoBehaviour
 {
 
@@ -22,10 +24,8 @@ public class BoardManager : MonoBehaviour
         Vector2 pos = new Vector2(0,0);
 
         for (int i = 0; i < num_rooms; i++)
-	{
+	    {
             Debug.Log("Creating room: " + i);
-
-            bool freeSpaceFound = false;
 
             IntVector2 size = new IntVector2(Random.Range(3, 10),Random.Range(3, 10));
 
@@ -45,6 +45,8 @@ public class BoardManager : MonoBehaviour
             rooms.Add(go);
 
             pos.x += r.getFullSize().x + 2;
+
+            Debug.Log("Pos is: " + pos.x);
 
         }
 

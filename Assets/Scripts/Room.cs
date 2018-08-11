@@ -39,7 +39,11 @@ public class Room : MonoBehaviour
     }
 
     public Vector2 getFullSize() {
-        return new Vector2((this.room_size.X + 2) * bounds.size.x, (this.room_size.Y + 2) * bounds.size.y);
+        Vector2 full_size = new Vector2((this.room_size.X + 2) * bounds.size.x, (this.room_size.Y + 2) * bounds.size.y);
+        Debug.Log("room_size.x: " + this.room_size.X);
+        Debug.Log("bounds_size.x: " + this.bounds.size.x);
+        Debug.Log("full_size: " + full_size);
+        return full_size;
     }
 
     public void Start()
@@ -72,7 +76,7 @@ public class Room : MonoBehaviour
                 }
 
 
-                Bounds bounds = toInit.GetComponent<Renderer>().bounds;
+                bounds = toInit.GetComponent<Renderer>().bounds;
 
                 float posx = room_position.x + (bounds.size.x * x);
                 float posy = room_position.y + (bounds.size.y * y);
