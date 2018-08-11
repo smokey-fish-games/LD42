@@ -20,12 +20,26 @@ public class Room : MonoBehaviour
 
     private Transform boardHolder;
 
+    private UnityEngine.Object pipe_resource;
+
+    public GameObject input_pipe;
+    public GameObject output_pipe;
+
+    private Bounds bounds;
+
+    private Transform in_location;
+
+
     public Room(Vector2 position, IntVector2 size)
-    {
+{ 
         this.room_position = position;
         this.room_size = size;
 
         initBoard();
+    }
+
+    public Vector2 getFullSize() {
+        return new Vector2((this.room_size.X + 2) * bounds.size.x, (this.room_size.Y + 2) * bounds.size.y);
     }
 
     public void Start()
@@ -79,5 +93,39 @@ public class Room : MonoBehaviour
         float posx = room_position.x + room_size.X * 0.5f;
         float posy = room_position.y + room_size.Y * 0.5f;
         player.transform.position = new Vector3(posx, posy, 0);
+    }
+
+    public Transform getInLocation() 
+    {
+        return input_pipe.transform;
+    }
+    
+    public Transform getOutLocation() {
+        return output_pipe.transform;
+    }
+    public void initPipes() {
+
+        pipe_resource = Resources.Load("Pipe");
+
+        Vector3 pos_in = new Vector3(room_position.x + bounds.size.x, room_position.y, 0f);
+        Vector3 pos_out = new Vector3(room_position.x + (bounds.size.x * (room_size.X - 2)), room_position.y + (bounds.size.y * 2));
+
+        input_pipe = Instantiate(pipe_resource, pos_in, Quaternion.identity) as GameObject;
+        output_pipe = Instantiate(pipe_resource, pos_out, Quaternion.identity) as GameObject;
+
+        input_pipe.transform.SetParent(boardHolder);
+        output_pipe.transform.SetParent(boardHolder);
+    }
+
+    public void connectInPipe (Transform destination) {
+        PipeController pc = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
+
+        pc.destination = destination;
+    }
+
+    public void connectOutPipe (Transform destination) {
+        PipeController pc = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
+
+        pc.destination = destination;
     }
 }

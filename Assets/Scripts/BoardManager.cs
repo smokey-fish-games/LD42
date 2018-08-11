@@ -18,12 +18,17 @@ public class BoardManager : MonoBehaviour
         Object room = Resources.Load("Room");
 
         Debug.Log("Will create rooms: " + num_rooms);
+
+        Vector2 pos = new Vector2(0,0);
+
         for (int i = 0; i < num_rooms; i++)
-        {
+	{
             Debug.Log("Creating room: " + i);
-            Vector2 pos = new Vector2(Random.Range(-50, 50), Random.Range(-50, 50));
-            IntVector2 size = new IntVector2(Random.Range(4, 10), Random.Range(6, 10));
-            //rooms.Add(new Room(pos, size));
+
+            bool freeSpaceFound = false;
+
+            IntVector2 size = new IntVector2(Random.Range(3, 10),Random.Range(3, 10));
+
 
             GameObject go = Instantiate(room) as GameObject;
             go.layer = 12;
@@ -37,6 +42,36 @@ public class BoardManager : MonoBehaviour
                 r.player = player;
             }
             r.initBoard();
+            rooms.Add(go);
+
+            pos.x += r.getFullSize().x + 2;
+
         }
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            Debug.Log("Init pipes: " + i);
+            Room r = rooms.ElementAt(i).GetComponent(typeof(Room)) as Room;
+            r.initPipes();
+        }
+
+        for (int i = 0; i < (rooms.Count - 1); i++)
+        {
+            Debug.Log("Connct pipes: " + i + " " + (i+1));
+            Room r = rooms.ElementAt(i).GetComponent(typeof(Room)) as Room;
+            Room r2 = rooms.ElementAt(i+1).GetComponent(typeof(Room)) as Room;
+            connect_rooms(r, r2);
+        }
+
+        
+        Room first_room = rooms.ElementAt(0).GetComponent(typeof(Room)) as Room;
+        Room last_room = rooms.ElementAt(rooms.Count-1).GetComponent(typeof(Room)) as Room;
+        connect_rooms(last_room, first_room);
+    }
+
+    private void connect_rooms(Room r1, Room r2)
+    {
+        r1.connectOutPipe(r2.getInLocation());
+        r2.connectInPipe(r1.getOutLocation());      
     }
 }
