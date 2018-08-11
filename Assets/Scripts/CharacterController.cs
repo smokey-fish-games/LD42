@@ -6,7 +6,8 @@ public class CharacterController : MonoBehaviour
 {
 
     public enum DIRECTION { UP, DOWN, LEFT, RIGHT, UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT };
-    public bool MOVEUP = false;
+	
+	public bool MOVEUP = false;
     public bool MOVEDOWN = false;
     public bool MOVELEFT = false;
     public bool MOVERIGHT = false;
