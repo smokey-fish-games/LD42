@@ -19,7 +19,7 @@ TagManager:
   - pipe
   - enemy
   - player
-  - 
+  - blocking
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: blocking
+    uniqueID: 2230004369
     locked: 0
