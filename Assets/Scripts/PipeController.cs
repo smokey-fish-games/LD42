@@ -6,17 +6,23 @@ public class PipeController : MonoBehaviour
 {
 
     public Transform destination;
-    public Collider2D col;
+    public bool isActive = true;
+    Collider2D col;
+    SpriteRenderer sp;
+
+    private void Start() {
+        col = gameObject.GetComponent<Collider2D>();
+        sp = gameObject.GetComponent<SpriteRenderer>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && isActive)
         {
             PlayerController pc = (PlayerController)other.GetComponent("PlayerController");
             if (pc == null)
             {
                 Debug.Log("WHAT?");
-
             }
             else
             {
@@ -32,6 +38,19 @@ public class PipeController : MonoBehaviour
                 }
             }
 
+        }
+    }
+
+    public void setActive(bool active, bool notifypartner) {
+        isActive = active;
+        PipeController OtherPipe = destination.GetComponent<PipeController>();
+        if (notifypartner){
+            OtherPipe.setActive(isActive, false);
+        }
+        if (isActive) {
+            sp.color = Color.white;
+        } else {
+            sp.color = Color.red;
         }
     }
 

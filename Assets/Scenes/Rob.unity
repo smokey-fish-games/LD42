@@ -255,19 +255,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1789068939}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4470843505492180, guid: 26f397ea9574ae7458b814439aa4dd0c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 14.063932
+      value: -12.826067
       objectReference: {fileID: 0}
     - target: {fileID: 4470843505492180, guid: 26f397ea9574ae7458b814439aa4dd0c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.596779
+      value: 2.96
       objectReference: {fileID: 0}
     - target: {fileID: 4470843505492180, guid: 26f397ea9574ae7458b814439aa4dd0c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.10560165
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4470843505492180, guid: 26f397ea9574ae7458b814439aa4dd0c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -287,7 +287,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4470843505492180, guid: 26f397ea9574ae7458b814439aa4dd0c, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114026848909317940, guid: 26f397ea9574ae7458b814439aa4dd0c,
         type: 2}
@@ -873,9 +873,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slocation: {fileID: 1364672465}
   rabbit: {fileID: 1476962323129180, guid: fcf783338324f1845b2962dc6343f6b6, type: 2}
-  interval: 5
+  interval: 2
   curTimer: 0
-  MaxCapacity: 20
+  MaxCapacity: 3
   slider: {fileID: 1475840649}
   text: {fileID: 238614139}
 --- !u!4 &1789068939
@@ -896,9 +896,8 @@ Transform:
   - {fileID: 1315811746}
   - {fileID: 1776672061}
   - {fileID: 1598451904}
-  - {fileID: 885261069}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1903349419
 Prefab:
