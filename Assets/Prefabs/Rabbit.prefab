@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4399713714801614}
   - component: {fileID: 212886953289504554}
-  - component: {fileID: 58196845882002924}
   - component: {fileID: 114084783820927860}
   - component: {fileID: 50607624099268508}
   - component: {fileID: 114252275928295792}
+  - component: {fileID: 70164041961524798}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Player
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1361380976265972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.8, y: 0, z: 0}
+  m_LocalPosition: {x: -25.2, y: -0.014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4238573765094118}
@@ -136,8 +136,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58196845882002924
-CircleCollider2D:
+--- !u!70 &70164041961524798
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -148,9 +148,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01, y: -0.0896163}
-  serializedVersion: 2
-  m_Radius: 0.66802555
+  m_Offset: {x: -0.056978595, y: -0.2876112}
+  m_Size: {x: 0.8268861, y: 0.20552894}
+  m_Direction: 1
 --- !u!81 &81931609939398778
 AudioListener:
   m_ObjectHideFlags: 1
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 114084783820927860}
-  co: {fileID: 58196845882002924}
+  co: {fileID: 70164041961524798}
 --- !u!212 &212886953289504554
 SpriteRenderer:
   m_ObjectHideFlags: 1
