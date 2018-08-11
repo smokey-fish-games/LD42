@@ -15,16 +15,16 @@ public class RoomController : MonoBehaviour {
 	public Slider slider;
 	public Text text;
 
-	float CurRabbits = 1;
+	float CurRabbits = 0;
+
+	public Animator ani;
 
 	private void FixedUpdate() {
-		//hello
 		curTimer += Time.deltaTime;
 		if (curTimer >= interval) {
 			SpawnRabbit();
 			curTimer = 0;
 		}
-
 		checkLose();
 	}	
 
@@ -32,17 +32,22 @@ public class RoomController : MonoBehaviour {
 
 	void SpawnRabbit(){
 		CurRabbits++;
-
 		Instantiate(rabbit, slocation.position, slocation.rotation);
 		slider.value = CurRabbits / MaxCapacity;
-		text.text = "" + Mathf.Round((CurRabbits / MaxCapacity) * 100)  + "%";
-
-
-
+		float perc = Mathf.Round((CurRabbits / MaxCapacity) * 100);
+		text.text = "" + perc  + "%";
+		if (perc >= 75) {
+			// Set animator alert
+			ani.SetBool("Alarm", true);
+		} else {
+			// Set animator to not alert
+			ani.SetBool("Alarm", false);
+		}
 	}
 
 	void checkLose(){
 		if (CurRabbits >= MaxCapacity) {
+			DisableMe();
 			// LOSE
 			Debug.Log("YOU LOSE SUCKER!");
 			Application.Quit();
@@ -51,6 +56,8 @@ public class RoomController : MonoBehaviour {
 	}
 
 	void DisableMe(){
-
+		foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>()) {
+				p.setActive(false, true);
+		}
 	}
 }
