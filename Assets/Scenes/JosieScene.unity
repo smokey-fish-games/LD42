@@ -312,7 +312,7 @@ MonoBehaviour:
   MOVEDOWN: 0
   MOVELEFT: 0
   MOVERIGHT: 0
-  speed: 5
+  speed: 10
 --- !u!1 &1824313280
 GameObject:
   m_ObjectHideFlags: 0
