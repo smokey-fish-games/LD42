@@ -14,6 +14,7 @@ public class CharacterController : MonoBehaviour {
 	public void Move(DIRECTION direction) {
 		Vector2 currentPos = transform.position;
 		Vector2 newpos = new Vector2();
+		float dirMove = (speed * Time.deltaTime) / 2;
 		switch (direction) {
 			case DIRECTION.UP:
 				Debug.Log("Moving up!");
@@ -34,19 +35,19 @@ public class CharacterController : MonoBehaviour {
 
 			case DIRECTION.UPLEFT:
 				Debug.Log("Moving up Left!");
-				newpos = currentPos + new Vector2(0, 0);
+				newpos = currentPos + new Vector2(-dirMove, dirMove);
 				break;
 			case DIRECTION.UPRIGHT:
 				Debug.Log("Moving Up Right!");
-				newpos = currentPos + new Vector2(0, 0);
+				newpos = currentPos + new Vector2(dirMove, dirMove);
 				break;
 			case DIRECTION.DOWNLEFT:
 				Debug.Log("Moving Down Left!");
-				newpos = currentPos + new Vector2(0, 0);
+				newpos = currentPos + new Vector2(-dirMove, -dirMove);
 				break;
 			case DIRECTION.DOWNRIGHT:
 				Debug.Log("Moving Down Right!");
-				newpos = currentPos + new Vector2(0, 0);
+				newpos = currentPos + new Vector2(dirMove, -dirMove);
 				break;
 
 			default:
@@ -62,18 +63,24 @@ public class CharacterController : MonoBehaviour {
 	/// </summary>
 	void Update()
 	{
-		if( MOVEUP ){
-			Move(DIRECTION.UP);
-		}
-		if( MOVEDOWN ){
+		if( MOVEUP && MOVELEFT ){
+			Move(DIRECTION.UPLEFT);
+		} else if (MOVEUP && MOVERIGHT) {
+			Move(DIRECTION.UPRIGHT);
+		} else if( MOVEDOWN && MOVELEFT ){
+			Move(DIRECTION.DOWNLEFT);
+		} else if( MOVEDOWN && MOVERIGHT){
+			Move(DIRECTION.DOWNRIGHT);
+		} else if (MOVEDOWN ){
 			Move(DIRECTION.DOWN);
-		}
-		if( MOVELEFT ){
+		} else if (MOVEUP) {
+			Move(DIRECTION.UP);
+		} else if( MOVELEFT ){
 			Move(DIRECTION.LEFT);
-		}
-		if( MOVERIGHT ){
+		} else if( MOVERIGHT ){
 			Move(DIRECTION.RIGHT);
+		} else {
+			Debug.Log("What?");
 		}
-		
 	}
 }
