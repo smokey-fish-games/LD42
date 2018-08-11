@@ -175,6 +175,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1903349419}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!95 &318796158 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95855227101099506, guid: a9da0de09e878324a9056e1c48578349,
+    type: 2}
+  m_PrefabInternal: {fileID: 1903349419}
 --- !u!1 &664638165
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +429,7 @@ Prefab:
     - target: {fileID: 114084783820927860, guid: 17ae27f7dddd1144293beca21a4a0b53,
         type: 2}
       propertyPath: speed
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17ae27f7dddd1144293beca21a4a0b53, type: 2}
@@ -873,11 +878,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slocation: {fileID: 1364672465}
   rabbit: {fileID: 1476962323129180, guid: fcf783338324f1845b2962dc6343f6b6, type: 2}
-  interval: 2
+  interval: 1.5
   curTimer: 0
-  MaxCapacity: 3
+  MaxCapacity: 20
   slider: {fileID: 1475840649}
   text: {fileID: 238614139}
+  ani: {fileID: 318796158}
 --- !u!4 &1789068939
 Transform:
   m_ObjectHideFlags: 0
@@ -995,10 +1001,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878479064183244, guid: a9da0de09e878324a9056e1c48578349, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da0de09e878324a9056e1c48578349, type: 2}

@@ -9,14 +9,14 @@ public abstract class MovingObject : MonoBehaviour
     public float detectionRadius = 0.3f;
     public LayerMask blockingLayer;
 
-    private CircleCollider2D circleCol;
+    private Collider2D col2D;
     private Rigidbody2D rb2D;
     private float inverseMoveTime;
 
     // Use this for initialization
     protected virtual void Start()
     {
-        circleCol = GetComponent<CircleCollider2D>();
+        col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
     }
@@ -31,11 +31,11 @@ public abstract class MovingObject : MonoBehaviour
         Vector2 end = start + new Vector2(xDir, yDir);
 
         // disable box collider so we don't hit it whilst looking out
-        circleCol.enabled = false;
+        col2D.enabled = false;
         // check for collisions in a straight line between start and end
         // on blockingLayer
         hit = Physics2D.Linecast(start, end, blockingLayer);
-        circleCol.enabled = true;
+        col2D.enabled = true;
 
         if (hit.transform == null)
         {

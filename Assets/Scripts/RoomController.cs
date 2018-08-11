@@ -17,6 +17,8 @@ public class RoomController : MonoBehaviour {
 
 	float CurRabbits = 0;
 
+	public Animator ani;
+
 	private void FixedUpdate() {
 		curTimer += Time.deltaTime;
 		if (curTimer >= interval) {
@@ -32,7 +34,15 @@ public class RoomController : MonoBehaviour {
 		CurRabbits++;
 		Instantiate(rabbit, slocation.position, slocation.rotation);
 		slider.value = CurRabbits / MaxCapacity;
-		text.text = "" + Mathf.Round((CurRabbits / MaxCapacity) * 100)  + "%";
+		float perc = Mathf.Round((CurRabbits / MaxCapacity) * 100);
+		text.text = "" + perc  + "%";
+		if (perc >= 75) {
+			// Set animator alert
+			ani.SetBool("Alarm", true);
+		} else {
+			// Set animator to not alert
+			ani.SetBool("Alarm", false);
+		}
 	}
 
 	void checkLose(){
