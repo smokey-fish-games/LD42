@@ -6,6 +6,7 @@ public class SpriteController : MonoBehaviour
 {
 
     public enum DIRECTION { UP, DOWN, LEFT, RIGHT, UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT };
+	
     public bool MOVEUP = false;
     public bool MOVEDOWN = false;
     public bool MOVELEFT = false;
