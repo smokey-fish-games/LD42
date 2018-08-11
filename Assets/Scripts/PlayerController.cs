@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public SpriteController controller;
-    public Collider2D co;
+    public Collider2D col;
     float h, v;
 
     bool movedByPipe = false;
