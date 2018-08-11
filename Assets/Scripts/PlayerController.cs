@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other)
+    {
         Debug.Log("PLAYER! -pc script");
     }
 }

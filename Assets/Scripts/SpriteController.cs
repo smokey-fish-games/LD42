@@ -40,7 +40,7 @@ public class SpriteController : MonoBehaviour
                 newpos = Vector2.down + Vector2.left;
                 break;
             case DIRECTION.DOWNRIGHT:
-                newpos = Vector2.down + Vector2.left;
+                newpos = Vector2.down + Vector2.right;
                 break;
             default:
                 Debug.Log("TODO " + direction);
