@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
 
     //SetMove
-    public void SetMove(bool move){
+    public void SetMove(bool move)
+    {
         movedByPipe = move;
     }
 
-    public bool GetMove(){
+    public bool GetMove()
+    {
         return movedByPipe;
     }
     void Update()
@@ -52,10 +54,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other) {
-         Debug.Log("Player trigger Exit");
-         if (other.tag == "Pipe"){
-         movedByPipe = false;
-         }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log("Player trigger Exit");
+        if (other.tag == "Pipe")
+        {
+            movedByPipe = false;
+        }
     }
 }

@@ -200,11 +200,11 @@ GameObject:
   - component: {fileID: 956013317}
   - component: {fileID: 956013316}
   - component: {fileID: 956013315}
-  - component: {fileID: 956013318}
   - component: {fileID: 956013319}
-  m_Layer: 0
-  m_Name: Blob
-  m_TagString: Untagged
+  - component: {fileID: 956013318}
+  m_Layer: 12
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,8 +256,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2064962927
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3b65d8bda3105d045aa284426fc794ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -291,12 +291,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 956013314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9067fca1388c824cb2cdb3df7e047ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f1f8231365664a47914da7dfbb78030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 956013319}
-  h: 0
-  v: 0
+  co: {fileID: 956013315}
 --- !u!114 &956013319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +311,7 @@ MonoBehaviour:
   MOVEDOWN: 0
   MOVELEFT: 0
   MOVERIGHT: 0
-  speed: 5
+  speed: 10
 --- !u!1 &1824313280
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,11 +321,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1824313283}
   - component: {fileID: 1824313282}
-  - component: {fileID: 1824313281}
   - component: {fileID: 1824313285}
   - component: {fileID: 1824313284}
-  m_Layer: 0
-  m_Name: RedBlob
+  - component: {fileID: 1824313281}
+  m_Layer: 12
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,14 +339,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824313280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b02597c1bbaad640a6ee00cc9c9b32d, type: 3}
+  m_Script: {fileID: 11500000, guid: d44079cdcf6ce3544a4416a29172d414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVEUP: 0
-  MOVEDOWN: 0
-  MOVELEFT: 0
-  MOVERIGHT: 0
-  speed: 10
+  moveTime: 1
+  blockingLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  playerDamage: 0
 --- !u!212 &1824313282
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -426,7 +425,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1824313285
 CircleCollider2D:
   m_ObjectHideFlags: 0
