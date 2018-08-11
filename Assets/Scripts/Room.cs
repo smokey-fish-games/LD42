@@ -27,7 +27,7 @@ public class Room : MonoBehaviour {
         initBoard();
     }
 
-    private void initBoard() 
+    public void initBoard() 
     {
         boardHolder = new GameObject("Board").transform;
 
@@ -38,11 +38,11 @@ public class Room : MonoBehaviour {
                 
                 if (x == -1 || x == room_size.X || y == -1 || y == room_size.Y) 
                 {
-                    Debug.Log("Select wal");                               
+                    //Debug.Log("Select wal");                               
                     toInit = wallTiles[Random.Range(0, wallTiles.Length)];
                 }
                 else {
-                    Debug.Log("Select floor");
+                    //Debug.Log("Select floor");
                     toInit = floorTiles[Random.Range(0, floorTiles.Length)];
                 }
 

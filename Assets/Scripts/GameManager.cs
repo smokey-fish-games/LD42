@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void InitGame() {
+        Debug.Log("Starting Game");
         boardScript.SetupScene();
     }
 }
