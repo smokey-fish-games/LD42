@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public BoardManager boardScript;
+    private BoardManager boardScript = new BoardManager();
 
     private int level = 1;
 
@@ -17,6 +17,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void InitGame() {
-        boardScript.SetupScene(level);
+        boardScript.SetupScene();
     }
 }
