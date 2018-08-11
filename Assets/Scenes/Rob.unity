@@ -210,7 +210,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1174441484424506, guid: 5e66b949be635a54e9f6afd09675c2e8, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e66b949be635a54e9f6afd09675c2e8, type: 2}
@@ -256,7 +256,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1375160674713400, guid: ebd0c0174424d1941a7623e4beba5da4, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebd0c0174424d1941a7623e4beba5da4, type: 2}
@@ -313,7 +313,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1714835773654042, guid: e46b89bee1ded1646ba3441b6769d042, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e46b89bee1ded1646ba3441b6769d042, type: 2}
@@ -558,6 +558,31 @@ Prefab:
     - target: {fileID: 4399713714801614, guid: 17ae27f7dddd1144293beca21a4a0b53, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937735504909320, guid: 17ae27f7dddd1144293beca21a4a0b53,
+        type: 2}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 1646205978558086, guid: 77736d90df83bfd4ba30d84219c31be3,
+        type: 2}
+    - target: {fileID: 114937735504909320, guid: 17ae27f7dddd1144293beca21a4a0b53,
+        type: 2}
+      propertyPath: cooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937735504909320, guid: 17ae27f7dddd1144293beca21a4a0b53,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4403259303457188, guid: 17ae27f7dddd1144293beca21a4a0b53, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.122
+      objectReference: {fileID: 0}
+    - target: {fileID: 50607624099268508, guid: 17ae27f7dddd1144293beca21a4a0b53,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1000000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17ae27f7dddd1144293beca21a4a0b53, type: 2}
@@ -1006,9 +1031,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slocation: {fileID: 1364672465}
   rabbit: {fileID: 1476962323129180, guid: fcf783338324f1845b2962dc6343f6b6, type: 2}
-  interval: 1.5
+  interval: 1
   curTimer: 0
-  MaxCapacity: 20
+  MaxCapacity: 10
   slider: {fileID: 1475840649}
   text: {fileID: 238614139}
   ani: {fileID: 318796158}
@@ -1129,6 +1154,16 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224134055442996112, guid: a9da0de09e878324a9056e1c48578349,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -62
+      objectReference: {fileID: 0}
+    - target: {fileID: 224134055442996112, guid: a9da0de09e878324a9056e1c48578349,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9da0de09e878324a9056e1c48578349, type: 2}
