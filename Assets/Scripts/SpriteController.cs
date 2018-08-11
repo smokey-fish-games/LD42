@@ -89,8 +89,4 @@ public class SpriteController : MonoBehaviour
             Move(DIRECTION.RIGHT);
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("PLAYER! -cc script");
-    }
 }

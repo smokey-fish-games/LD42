@@ -5,18 +5,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public SpriteController controller;
-    public float h;
-    public float v;
+    public Collider2D co;
+    float h, v;
 
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
+    bool movedByPipe = false;
 
     // Update is called once per frame
+
+    //SetMove
+    public void SetMove(bool move){
+        movedByPipe = move;
+    }
+
+    public bool GetMove(){
+        return movedByPipe;
+    }
     void Update()
     {
         controller.MOVEUP = false;
@@ -49,8 +52,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("PLAYER! -pc script");
+    void OnTriggerExit2D(Collider2D other) {
+         Debug.Log("Player trigger Exit");
+         if (other.tag == "Pipe"){
+         movedByPipe = false;
+         }
     }
 }
