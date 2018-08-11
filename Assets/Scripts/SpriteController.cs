@@ -18,36 +18,28 @@ public class SpriteController : MonoBehaviour
         switch (direction)
         {
             case DIRECTION.UP:
-                Debug.Log("Moving up!");
                 newpos = Vector2.up;
                 break;
             case DIRECTION.DOWN:
-                Debug.Log("Moving Down!");
                 newpos = Vector2.down;
                 break;
             case DIRECTION.LEFT:
-                Debug.Log("Moving Left!");
                 newpos = Vector2.left;
                 break;
             case DIRECTION.RIGHT:
-                Debug.Log("Moving Right!");
                 newpos = Vector2.right;
                 break;
 
             case DIRECTION.UPLEFT:
-                Debug.Log("Moving up Left!");
                 newpos = Vector2.up + Vector2.left;
                 break;
             case DIRECTION.UPRIGHT:
-                Debug.Log("Moving Up Right!");
                 newpos = Vector2.up + Vector2.right;
                 break;
             case DIRECTION.DOWNLEFT:
-                Debug.Log("Moving Down Left!");
                 newpos = Vector2.down + Vector2.left;
                 break;
             case DIRECTION.DOWNRIGHT:
-                Debug.Log("Moving Down Right!");
                 newpos = Vector2.down + Vector2.left;
                 break;
             default:
@@ -95,9 +87,9 @@ public class SpriteController : MonoBehaviour
         {
             Move(DIRECTION.RIGHT);
         }
-        else
-        {
-            Debug.Log("What?");
-        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("PLAYER! -cc script");
     }
 }

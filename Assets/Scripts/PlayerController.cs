@@ -48,4 +48,8 @@ public class PlayerController : MonoBehaviour
             controller.MOVEDOWN = true;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("PLAYER! -pc script");
+    }
 }
