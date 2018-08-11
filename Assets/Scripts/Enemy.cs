@@ -51,12 +51,10 @@ public class Enemy : MovingObject
         // are we in the same column as our player?
         if (Mathf.Abs(target.position.x - transform.position.x) < base.detectionRadius)
         {
-            Debug.Log("same column");
             yDir = target.position.y > transform.position.y ? 1 : -1;
         }
         else
         {
-            Debug.Log("different column");
             xDir = target.position.x > transform.position.x ? 1 : -1;
         }
 

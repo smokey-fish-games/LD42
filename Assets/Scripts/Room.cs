@@ -6,42 +6,53 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-public class Room : MonoBehaviour {
+public class Room : MonoBehaviour
+{
 
     public Vector2 room_position = new Vector2(0f, 0f);
     public IntVector2 room_size = new IntVector2(8, 8);
 
     public GameObject[] floorTiles;
     public GameObject[] wallTiles;
+    public GameObject player;
+
+    public bool startRoom;
 
     private Transform boardHolder;
 
-    public Room(Vector2 position, IntVector2 size){ 
+    public Room(Vector2 position, IntVector2 size)
+    {
         this.room_position = position;
         this.room_size = size;
 
         initBoard();
     }
 
-    public void Start() {
+    public void Start()
+    {
         initBoard();
     }
 
-    public void initBoard() 
+    public void initBoard()
     {
-        boardHolder = new GameObject("Board").transform;
+        GameObject board = new GameObject("Board");
+        board.layer = 12;
+        boardHolder = board.transform;
 
-        for (int x = -1; x < room_size.X +1; x++) {
-            for (int y = -1; y < room_size.Y +1; y++) {
-                
+        for (int x = -1; x < room_size.X + 1; x++)
+        {
+            for (int y = -1; y < room_size.Y + 1; y++)
+            {
+
                 GameObject toInit;
-                
-                if (x == -1 || x == room_size.X || y == -1 || y == room_size.Y) 
+
+                if (x == -1 || x == room_size.X || y == -1 || y == room_size.Y)
                 {
                     //Debug.Log("Select wal");                               
                     toInit = wallTiles[Random.Range(0, wallTiles.Length)];
                 }
-                else {
+                else
+                {
                     //Debug.Log("Select floor");
                     toInit = floorTiles[Random.Range(0, floorTiles.Length)];
                 }
@@ -56,6 +67,17 @@ public class Room : MonoBehaviour {
 
                 instance.transform.SetParent(boardHolder);
             }
-        }        
+        }
+        if (startRoom)
+        {
+            spawnPlayer();
+        }
+    }
+
+    public void spawnPlayer()
+    {
+        float posx = room_position.x + room_size.X * 0.5f;
+        float posy = room_position.y + room_size.Y * 0.5f;
+        player.transform.position = new Vector3(posx, posy, 0);
     }
 }
