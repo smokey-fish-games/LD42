@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4286774959451752}
   - component: {fileID: 212678741319689030}
   - component: {fileID: 61355743240153750}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CircuitWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082685271277410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.954152, y: -1.0761179, z: 11.311286}
+  m_LocalPosition: {x: -84.0334, y: -22.671877, z: 11.311286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.42}
+  m_Size: {x: 5.15, y: 2.56}
   m_EdgeRadius: 0
 --- !u!212 &212678741319689030
 SpriteRenderer:

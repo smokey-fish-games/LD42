@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4101791093090490}
   - component: {fileID: 212810584721420628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CircuitFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
