@@ -16,12 +16,9 @@ public class AttackController : MonoBehaviour
     }
 
 
-    public void attemptAttack()
+    public void attemptAttack(Vector3 position)
     {
-        Debug.Log("Attempt attack");
-
-        Debug.Log("attack countdown finished");
-        mousePos = Input.mousePosition;
+        mousePos = (Vector2)Camera.main.ScreenToWorldPoint(position);
         attackEnemy();
         return;
 
@@ -32,14 +29,13 @@ public class AttackController : MonoBehaviour
         Vector2 start = transform.position;
 
         attackAnimator.SetTrigger("Active");
-
-        if (transform.position.magnitude > attackRange)
+        if ((start - mousePos).sqrMagnitude > attackRange)
         {
             Debug.Log("attack out of range");
             return;
         }
 
-        Vector2 end = start + mousePos;
+        Vector2 end = mousePos;
 
         // disable collider so we don't hit it whilst looking out
         Collider2D col2d = GetComponentInParent<Collider2D>();
@@ -54,6 +50,8 @@ public class AttackController : MonoBehaviour
             Debug.Log("no enemies");
             return;
         }
+        Debug.Log("enemy found");
+
         Enemy enemy = hit.transform.GetComponent<Enemy>();
         if (enemy != null)
         {
@@ -61,3 +59,4 @@ public class AttackController : MonoBehaviour
         }
     }
 }
+;
