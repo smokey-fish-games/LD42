@@ -19,13 +19,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4856916314467718}
+  - component: {fileID: 114643681498541294}
   - component: {fileID: 212630320802335426}
-  - component: {fileID: 114693441397088312}
-  - component: {fileID: 114230526012647898}
   - component: {fileID: 70151975641409008}
   - component: {fileID: 50241584002637542}
   - component: {fileID: 95319158311546126}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: firewall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1375160674713400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.864979, y: 1.3508394, z: 0}
+  m_LocalPosition: {x: -27.250563, y: -0.79593885, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,7 +97,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114230526012647898
+--- !u!114 &114643681498541294
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,31 +105,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1375160674713400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d44079cdcf6ce3544a4416a29172d414, type: 3}
+  m_Script: {fileID: 11500000, guid: af115d7fd9fc47945917d0791f8e5c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0.1
-  detectionRadius: 0.3
+  moveTime: 2
   blockingLayer:
     serializedVersion: 2
-    m_Bits: 0
-  playerDamage: 0
---- !u!114 &114693441397088312
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1375160674713400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b02597c1bbaad640a6ee00cc9c9b32d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MOVEUP: 0
-  MOVEDOWN: 0
-  MOVELEFT: 0
-  MOVERIGHT: 0
-  speed: 10
+    m_Bits: 4096
+  health: 3
 --- !u!212 &212630320802335426
 SpriteRenderer:
   m_ObjectHideFlags: 1

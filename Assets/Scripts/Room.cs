@@ -31,14 +31,15 @@ public class Room : MonoBehaviour
 
 
     public Room(Vector2 position, IntVector2 size)
-{ 
+    {
         this.room_position = position;
         this.room_size = size;
 
         initBoard();
     }
 
-    public Vector2 getFullSize() {
+    public Vector2 getFullSize()
+    {
         Vector2 full_size = new Vector2((this.room_size.X + 2) * bounds.size.x, (this.room_size.Y + 2) * bounds.size.y);
         Debug.Log("room_size.x: " + this.room_size.X);
         Debug.Log("bounds_size.x: " + this.bounds.size.x);
@@ -88,26 +89,28 @@ public class Room : MonoBehaviour
         }
         if (startRoom)
         {
-            spawnPlayer();
+            setPlayerStart();
         }
     }
 
-    public void spawnPlayer()
+    public void setPlayerStart()
     {
         float posx = room_position.x + room_size.X * 0.5f;
         float posy = room_position.y + room_size.Y * 0.5f;
         player.transform.position = new Vector3(posx, posy, 0);
     }
 
-    public Transform getInLocation() 
+    public Transform getInLocation()
     {
         return input_pipe.transform;
     }
-    
-    public Transform getOutLocation() {
+
+    public Transform getOutLocation()
+    {
         return output_pipe.transform;
     }
-    public void initPipes() {
+    public void initPipes()
+    {
 
         pipe_resource = Resources.Load("Pipe");
 
@@ -121,13 +124,15 @@ public class Room : MonoBehaviour
         output_pipe.transform.SetParent(boardHolder);
     }
 
-    public void connectInPipe (Transform destination) {
+    public void connectInPipe(Transform destination)
+    {
         PipeController pc = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
 
         pc.destination = destination;
     }
 
-    public void connectOutPipe (Transform destination) {
+    public void connectOutPipe(Transform destination)
+    {
         PipeController pc = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
 
         pc.destination = destination;
