@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50607624099268508}
   - component: {fileID: 114252275928295792}
   - component: {fileID: 70164041961524798}
+  - component: {fileID: 95216456355905966}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Player
@@ -110,6 +111,24 @@ CapsuleCollider2D:
   m_Offset: {x: -0.056978595, y: -0.2876112}
   m_Size: {x: 0.8268861, y: 0.20552894}
   m_Direction: 1
+--- !u!95 &95216456355905966
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1361380976265972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 793a95db5c95164409241e341126f762, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114084783820927860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -234,7 +253,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: e4d3546adcb28164d9cbfbc6ffeb5ef6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6db2b3f17864064dad1f7b8b6a5f052, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -244,4 +263,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 0
