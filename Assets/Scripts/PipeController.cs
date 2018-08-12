@@ -7,6 +7,7 @@ public class PipeController : MonoBehaviour
 
     public Transform destination;
     public bool isActive = true;
+    bool locked = true;
     Collider2D col;
     public Room parent;
     public Room destination_room;
@@ -21,7 +22,7 @@ public class PipeController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && isActive)
+        if (other.tag == "Player" && isActive && !locked)
         {
             PlayerController pc = (PlayerController)other.GetComponent("PlayerController");
             if (pc == null)
@@ -58,6 +59,13 @@ public class PipeController : MonoBehaviour
             OtherPipe.setActive(isActive, false);
         }
         ani.SetBool("active", active);
+    }
+
+    public void setLocked(bool lockB){
+        locked = lockB;
+        if (ani != null ){ 
+            ani.SetBool("locked", locked);
+        }
     }
 
     void FixedUpdate()

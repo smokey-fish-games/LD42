@@ -36,6 +36,7 @@ public class Room : MonoBehaviour
     public bool visited = false;
     bool visitedOnce = false;
     public bool killed = false;
+    bool unlockPipes = false;
 
     public int IDSNum = 3;
     public int FIREWALLNum = 3;
@@ -173,6 +174,8 @@ public class Room : MonoBehaviour
 
     private void FixedUpdate()
     {
+        checkOpenPipe();
+
         if (visited) {
             visitedOnce = true;
         }
@@ -191,6 +194,19 @@ public class Room : MonoBehaviour
                 curTimer = 0;
             }
             checkLose();
+        }
+    }
+
+    void checkOpenPipe(){
+        int enemyCount = gameObject.GetComponentsInChildren<Enemy>().Length;
+
+        bool lockedPipes = true;
+        if (enemyCount <= 0) {
+            lockedPipes = false;
+        }
+
+        foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>()){
+            p.setLocked(lockedPipes);
         }
     }
 
@@ -242,11 +258,6 @@ public class Room : MonoBehaviour
                     r.killIT();
                     derp.killIT();
                 }
-
-                GameObject go;
-                go = GameObject.FindGameObjectWithTag("GC");
-                BoardManager gm = go.GetComponent<BoardManager>();
-                gm.StopScore();
             }
             DisableMe();
         }

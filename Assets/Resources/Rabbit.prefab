@@ -212,6 +212,7 @@ MonoBehaviour:
   attack: {fileID: 114490768091050108}
   cooldown: 1
   attackCountdown: 0
+  img: {fileID: 0}
 --- !u!114 &114490768091050108
 MonoBehaviour:
   m_ObjectHideFlags: 1
