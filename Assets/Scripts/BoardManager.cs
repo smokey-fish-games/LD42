@@ -74,7 +74,7 @@ public class BoardManager : MonoBehaviour
             //https://youtu.be/DDGpwuMAmVs?t=24s
             r.ani = this.ani;
 
-            r.MaxCapacity = 20;
+            r.MaxCapacity = Mathf.Round(10 + (50 * (intervalMax - r.interval)));
 
             r.IDSNum = Random.Range(minEnemy, maxEnemy);
             r.FIREWALLNum =Random.Range(minEnemy, maxEnemy);
