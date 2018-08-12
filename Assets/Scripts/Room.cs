@@ -169,18 +169,24 @@ public class Room : MonoBehaviour
     public Text text;
     // 
     public Animator ani;
+    public GameObject BSOD;
 
     private void FixedUpdate()
     {
         if (visited) {
             visitedOnce = true;
         }
+
+        if (killed){
+            DisableMe();
+            return;
+        }
+
         if (!killed && visitedOnce)
         {
             curTimer += Time.deltaTime;
             if (curTimer > interval)
             {
-
                 SpawnRabbit();
                 curTimer = 0;
             }
@@ -227,11 +233,22 @@ public class Room : MonoBehaviour
     {
         if (CurRabbits >= MaxCapacity)
         {
-            DisableMe();
-            // LOSE
-            //Debug.Log("YOU LOSE SUCKER!");
-            //Application.Quit();
+            if (visited){
+                BSOD.SetActive(true);
+                // Kill all other rooms
+                Room[] allRooms = GameObject.FindObjectsOfType(typeof(Room)) as Room[];
+                foreach (Room derp in allRooms){
+                    Room r = derp.GetComponent<Room>();
+                    r.killIT();
+                    derp.killIT();
+                }
 
+                GameObject go;
+                go = GameObject.FindGameObjectWithTag("GC");
+                BoardManager gm = go.GetComponent<BoardManager>();
+                gm.StopScore();
+            }
+            DisableMe();
         }
     }
 
@@ -283,6 +300,11 @@ public class Room : MonoBehaviour
     public void setEnabled(bool e)
     {
         this.visited = e;
+    }
+
+    public void killIT(){
+        killed = true;
+        DisableMe();
     }
 
 }

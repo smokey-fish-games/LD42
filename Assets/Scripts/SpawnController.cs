@@ -35,7 +35,7 @@ public class SpawnController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-		void Update () {
+		void FixedUpdate () {
 		// move around a bit?
 		if (!stop){
 			shouldDoMove();

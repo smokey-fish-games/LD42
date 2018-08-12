@@ -22,14 +22,17 @@ public class BoardManager : MonoBehaviour
 	public Text text;
 	public Animator ani;
 
+    bool stopScore = false;
     public Text score;
+    public Text finalScore;
+    public GameObject BSOD;
 
     int CurScore = 0;
 
     List<Room> allRooms;
 
     public float interval = 1;
-    public float intervalMax = 1;
+    public float intervalMax = 1.5f;
     public float intervalMin = 0.5f;
 
     public int minEnemy = 0;
@@ -68,6 +71,7 @@ public class BoardManager : MonoBehaviour
             r.rabbit = this.rabbit;
             r.player = this.player;
             r.interval = Random.Range(intervalMin, intervalMax);
+            r.BSOD = BSOD;
 
             r.slider = this.slider;
             r.text = this.text;
@@ -121,7 +125,7 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (allRooms != null) {
+        if (allRooms != null && !stopScore) {
             int countScore = 0;
             foreach (Room r in allRooms) {
                 // count da rabbits
@@ -138,5 +142,10 @@ public class BoardManager : MonoBehaviour
         }
 
         score.text = "" + CurScore;
+        finalScore.text = "(" + CurScore + ")";
+    }
+
+    public void StopScore(){
+        stopScore = true;
     }
 }
