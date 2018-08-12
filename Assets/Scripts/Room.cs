@@ -4,6 +4,7 @@ using System;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Room : MonoBehaviour
@@ -29,6 +30,7 @@ public class Room : MonoBehaviour
 
     private Transform in_location;
 
+    public bool enabled = false;
 
     public Room(Vector2 position, IntVector2 size)
     {
@@ -120,21 +122,110 @@ public class Room : MonoBehaviour
         input_pipe = Instantiate(pipe_resource, pos_in, Quaternion.identity) as GameObject;
         output_pipe = Instantiate(pipe_resource, pos_out, Quaternion.identity) as GameObject;
 
+        PipeController i = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
+        PipeController o = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
+
         input_pipe.transform.SetParent(boardHolder);
         output_pipe.transform.SetParent(boardHolder);
     }
 
-    public void connectInPipe(Transform destination)
+    public void connectInPipe(Room destination)
     {
         PipeController pc = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
 
-        pc.destination = destination;
+        pc.destination = destination.getOutLocation();
+        pc.parent = this;
+        pc.destination_room = destination;
     }
 
-    public void connectOutPipe(Transform destination)
+    public void connectOutPipe(Room destination)
     {
         PipeController pc = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
 
-        pc.destination = destination;
+        pc.destination = destination.getInLocation();
+        pc.parent = this;
+        pc.destination_room = destination;
     }
+
+    public Transform slocation;
+    public GameObject rabbit;
+    public float interval = 1;
+    public float curTimer = 0;
+
+    float CurRabbits = 0;
+    public float MaxCapacity = 20;
+
+    public Slider slider;
+    public Text text;
+    // 
+    public Animator ani;
+
+    private void FixedUpdate()
+    {
+        if (enabled)
+        {
+            curTimer += Time.deltaTime;
+            Debug.Log("curTimer: " + curTimer);
+            Debug.Log("interval:" + interval);
+            if (curTimer > interval)
+            {
+
+                SpawnRabbit();
+                curTimer = 0;
+            }
+            checkLose();
+        }
+    }
+
+    void SpawnRabbit()
+    {
+        CurRabbits++;
+        //Debug.Log(player.transform.position);
+        GameObject go = Instantiate(rabbit, player.transform.position, player.transform.rotation);
+        go.layer = 12;
+        updateUI();
+    }
+
+    public void updateUI()
+    {
+        slider.value = CurRabbits / MaxCapacity;
+        float perc = Mathf.Round((CurRabbits / MaxCapacity) * 100);
+        text.text = "" + perc + "%";
+        if (perc >= 75)
+        {
+            // Set animator alert
+            ani.SetBool("Alarm", true);
+        }
+        else
+        {
+            // Set animator to not alert
+            ani.SetBool("Alarm", false);
+        }
+    }
+
+    void checkLose()
+    {
+        if (CurRabbits >= MaxCapacity)
+        {
+            DisableMe();
+            // LOSE
+            //Debug.Log("YOU LOSE SUCKER!");
+            //Application.Quit();
+
+        }
+    }
+
+    void DisableMe()
+    {
+        foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>())
+        {
+            p.setActive(false, true);
+        }
+    }
+
+    public void setEnabled(bool e)
+    {
+        this.enabled = e;
+    }
+
 }

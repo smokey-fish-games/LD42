@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
+using UnityEngine.UI;
+
 using System.Linq;
 
 public class BoardManager : MonoBehaviour
@@ -11,8 +13,16 @@ public class BoardManager : MonoBehaviour
 
     private List<GameObject> rooms = new List<GameObject>();
 
+
     public int num_rooms = 1;
     public GameObject player;
+    public GameObject rabbit;
+
+	public Slider slider;
+	public Text text;
+	public Animator ani;
+
+    public int interval = 1;
 
     public void SetupScene()
     {
@@ -29,7 +39,6 @@ public class BoardManager : MonoBehaviour
 
             IntVector2 size = new IntVector2(Random.Range(3, 10),Random.Range(3, 10));
 
-
             GameObject go = Instantiate(room) as GameObject;
             go.layer = 12;
 
@@ -41,6 +50,17 @@ public class BoardManager : MonoBehaviour
                 r.startRoom = true;
                 r.player = player;
             }
+            r.rabbit = this.rabbit;
+            r.player = this.player;
+            r.interval = this.interval;
+
+            r.slider = this.slider;
+            r.text = this.text;
+            //https://youtu.be/DDGpwuMAmVs?t=24s
+            r.ani = this.ani;
+
+            r.MaxCapacity = 20;
+
             r.initBoard();
             rooms.Add(go);
 
@@ -73,7 +93,7 @@ public class BoardManager : MonoBehaviour
 
     private void connect_rooms(Room r1, Room r2)
     {
-        r1.connectOutPipe(r2.getInLocation());
-        r2.connectInPipe(r1.getOutLocation());      
+        r1.connectOutPipe(r2);
+        r2.connectInPipe(r1);      
     }
 }
