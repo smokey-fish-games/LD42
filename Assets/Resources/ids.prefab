@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 212352150162562650}
   - component: {fileID: 70438460330862806}
   - component: {fileID: 114173157948176044}
-  - component: {fileID: 114914510484447246}
   - component: {fileID: 50998593399322646}
   - component: {fileID: 95052900899502218}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +55,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -109,28 +108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44079cdcf6ce3544a4416a29172d414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0.1
+  moveTime: 3
   detectionRadius: 0.3
   blockingLayer:
     serializedVersion: 2
-    m_Bits: 0
-  playerDamage: 0
---- !u!114 &114914510484447246
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1174441484424506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b02597c1bbaad640a6ee00cc9c9b32d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MOVEUP: 0
-  MOVEDOWN: 0
-  MOVELEFT: 0
-  MOVERIGHT: 0
-  speed: 10
+    m_Bits: 4096
+  health: 1
+  cooldown: 2
 --- !u!212 &212352150162562650
 SpriteRenderer:
   m_ObjectHideFlags: 1

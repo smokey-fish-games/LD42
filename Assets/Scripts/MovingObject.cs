@@ -5,17 +5,17 @@ using UnityEngine;
 public abstract class MovingObject : MonoBehaviour
 {
 
-    public float moveTime = 1f;
-    abstract public float detectionRadius { get; set; }
+    public float moveTime = 2f;
+    public float detectionRadius = 0.3f;
     public LayerMask blockingLayer;
 
-    private Collider2D col2D;
+    private Collider2D myCollider;
     private Rigidbody2D rb2D;
 
     // Use this for initialization
     protected virtual void Start()
     {
-        col2D = GetComponent<Collider2D>();
+        myCollider = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
     }
 
@@ -28,12 +28,12 @@ public abstract class MovingObject : MonoBehaviour
         Vector2 start = transform.position;
         Vector2 end = start + new Vector2(xDir, yDir);
 
-        // disable box collider so we don't hit it whilst looking out
-        col2D.enabled = false;
+        // disable collider so we don't hit it whilst looking out
+        myCollider.enabled = false;
         // check for collisions in a straight line between start and end
         // on blockingLayer
         hit = Physics2D.Linecast(start, end, blockingLayer);
-        col2D.enabled = true;
+        myCollider.enabled = true;
 
         if (hit.transform == null)
         {
@@ -72,6 +72,7 @@ public abstract class MovingObject : MonoBehaviour
         // we don't know what type of hit component we're going to get
         // so keep this generic
         T hitComponent = hit.transform.GetComponent<T>();
+
         if (!canMove && hitComponent != null)
             OnCantMove(hitComponent);
     }

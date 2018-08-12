@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    private BoardManager boardScript = new BoardManager();
+    private BoardManager boardScript;
 
     void Awake()
     {

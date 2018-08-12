@@ -34,8 +34,7 @@ public class PlayerController : MonoBehaviour
         {
             if (attackCountdown <= 0)
             {
-                Debug.Log("button down");
-                attack.attemptAttack();
+                attack.attemptAttack(Input.mousePosition);
                 attackCountdown = cooldown;
                 return;
             }
@@ -82,7 +81,7 @@ public class PlayerController : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            Debug.Log("You Died");
+            // Debug.Log("You Died");
             // TODO: kill da wabbit
             // Destroy(gameObject);
         }
