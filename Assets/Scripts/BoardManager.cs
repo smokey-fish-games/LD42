@@ -22,6 +22,10 @@ public class BoardManager : MonoBehaviour
 	public Text text;
 	public Animator ani;
 
+    public Text score;
+
+    int CurScore = 0;
+
     public float interval = 1;
     public float intervalMax = 1;
     public float intervalMin = 0.5f;
@@ -106,5 +110,13 @@ public class BoardManager : MonoBehaviour
     {
         r1.connectOutPipe(r2);
         r2.connectInPipe(r1);      
+    }
+
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void Update()
+    {
+        
     }
 }
