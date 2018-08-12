@@ -41,8 +41,10 @@ public class BoardManager : MonoBehaviour
 
             GameObject go = Instantiate(room) as GameObject;
             go.layer = 12;
+            go.transform.parent = transform.parent;
 
             Room r = go.GetComponent(typeof(Room)) as Room;
+            r.transform.parent = transform.parent;
             r.room_position = pos;
             r.room_size = size;
             if (i == 0)
