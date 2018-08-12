@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using TMPro;
 
 using UnityEngine.UI;
 
@@ -22,8 +23,17 @@ public class BoardManager : MonoBehaviour
 	public Text text;
 	public Animator ani;
 
+    bool stopScore = false;
+    public Text score;
+    public Text finalScore;
+    public GameObject BSOD;
+
+    int CurScore = 0;
+
+    List<Room> allRooms;
+
     public float interval = 1;
-    public float intervalMax = 1;
+    public float intervalMax = 1.5f;
     public float intervalMin = 0.5f;
 
     public int minEnemy = 0;
@@ -31,6 +41,7 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene()
     {
+        allRooms = new List<Room>();
 
         Object room = Resources.Load("Room");
 
@@ -49,6 +60,7 @@ public class BoardManager : MonoBehaviour
             go.transform.parent = transform.parent;
 
             Room r = go.GetComponent(typeof(Room)) as Room;
+            allRooms.Add(r);
             r.transform.parent = transform.parent;
             r.room_position = pos;
             r.room_size = size;
@@ -60,13 +72,14 @@ public class BoardManager : MonoBehaviour
             r.rabbit = this.rabbit;
             r.player = this.player;
             r.interval = Random.Range(intervalMin, intervalMax);
+            r.BSOD = BSOD;
 
             r.slider = this.slider;
             r.text = this.text;
             //https://youtu.be/DDGpwuMAmVs?t=24s
             r.ani = this.ani;
 
-            r.MaxCapacity = 20;
+            r.MaxCapacity = Mathf.Round(10 + (50 * (intervalMax - r.interval)));
 
             r.IDSNum = Random.Range(minEnemy, maxEnemy);
             r.FIREWALLNum =Random.Range(minEnemy, maxEnemy);
@@ -106,5 +119,34 @@ public class BoardManager : MonoBehaviour
     {
         r1.connectOutPipe(r2);
         r2.connectInPipe(r1);      
+    }
+
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void Update()
+    {
+        if (allRooms != null && !stopScore) {
+            int countScore = 0;
+            foreach (Room r in allRooms) {
+                // count da rabbits
+                countScore += r.GetComponentsInChildren<SpawnController>().Length;
+
+                // check for dead rooms
+                if (r.killed) {
+                    countScore += 100;
+                }
+            }
+
+            // got the score... update!
+            CurScore = countScore;
+        }
+
+        score.text = "" + CurScore;
+        finalScore.text = "(" + CurScore + ")";
+    }
+
+    public void StopScore(){
+        stopScore = true;
     }
 }

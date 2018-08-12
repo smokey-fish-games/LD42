@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pipe
   - Enemy
+  - GC
   layers:
   - Default
   - TransparentFX
