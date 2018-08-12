@@ -28,6 +28,8 @@ public class Room : MonoBehaviour
 
     private Bounds bounds;
 
+    bool disabledRoom = false;
+
     private Transform in_location;
 
     public bool enabled = false;
@@ -42,9 +44,9 @@ public class Room : MonoBehaviour
 
     public Vector2 getFullSize() {
         Vector2 full_size = new Vector2((this.room_size.X + 2) * bounds.size.x, (this.room_size.Y + 2) * bounds.size.y);
-        Debug.Log("room_size.x: " + this.room_size.X);
-        Debug.Log("bounds_size.x: " + this.bounds.size.x);
-        Debug.Log("full_size: " + full_size);
+        // Debug.Log("room_size.x: " + this.room_size.X);
+        // Debug.Log("bounds_size.x: " + this.bounds.size.x);
+        // Debug.Log("full_size: " + full_size);
         return full_size;
     }
 
@@ -122,8 +124,11 @@ public class Room : MonoBehaviour
         PipeController i = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
         PipeController o = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
 
-        input_pipe.transform.SetParent(boardHolder);
-        output_pipe.transform.SetParent(boardHolder);
+        input_pipe.transform.parent = transform;
+        output_pipe.transform.parent = transform;
+
+        // input_pipe.transform.SetParent(boardHolder);
+        // output_pipe.transform.SetParent(boardHolder);
     }
 
     public void connectInPipe (Room destination) {
@@ -158,8 +163,6 @@ public class Room : MonoBehaviour
 	private void FixedUpdate() {
         if (enabled) {
             curTimer += Time.deltaTime;
-            Debug.Log("curTimer: " + curTimer);
-            Debug.Log("interval:" + interval);
             if (curTimer > interval) {
                 
                 SpawnRabbit();
@@ -170,10 +173,18 @@ public class Room : MonoBehaviour
 	}	
 
 	void SpawnRabbit(){
-		CurRabbits++;
+        // Count the rabbits
+        CurRabbits = GetComponentsInChildren<SpawnController>().Length;
+
+
         //Debug.Log(player.transform.position);
 		GameObject go = Instantiate(rabbit, player.transform.position, player.transform.rotation);
+        go.transform.parent = transform;
 		go.layer = 12;
+
+        CurRabbits++;
+
+
         updateUI();
 	}
 
@@ -201,9 +212,16 @@ public class Room : MonoBehaviour
 	}
 
 	void DisableMe(){
+        setEnabled(false);
+        // tell pipes to stop
 		foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>()) {
 				p.setActive(false, true);
 		}
+        // tell rabbits to stop
+        foreach (SpawnController s in gameObject.GetComponentsInChildren<SpawnController>()) {
+            s.stopSpawning();
+        }
+
 	}
 
     public void setEnabled(bool e) {

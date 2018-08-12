@@ -13,9 +13,12 @@ public class PipeController : MonoBehaviour
     public Room parent;
     public Room destination_room;
 
+    Animator ani;
+
     private void Start() {
         col = gameObject.GetComponent<Collider2D>();
         sp = gameObject.GetComponent<SpriteRenderer>();
+        ani = GetComponent<Animator>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -54,11 +57,7 @@ public class PipeController : MonoBehaviour
         if (notifypartner){
             OtherPipe.setActive(isActive, false);
         }
-        if (isActive) {
-            sp.color = Color.white;
-        } else {
-            sp.color = Color.red;
-        }
+        ani.SetBool("active", active);
     }
 
     void FixedUpdate()

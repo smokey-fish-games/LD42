@@ -7,10 +7,15 @@ public class SpawnController : MonoBehaviour {
 	public float moveIntMax = 0.5f;
 	public float moveIntMin = 0.2f;
 
+	public GameObject spawner;
+
 	public float stopMax = 5f;
 	public float stopMin = 2f;
 
 	public float speed = 5f;
+
+	public float splitMin = 5f;
+	public float splitMax = 10f;
 
 	bool moving = false;
 	SpriteController.DIRECTION dirMoving;
@@ -18,6 +23,9 @@ public class SpawnController : MonoBehaviour {
 	Animator ani;
 
 	float moveFor = 0f;
+	float split = 10f;
+
+	bool stop = false;
 
 
 	private void Start() {
@@ -29,11 +37,14 @@ public class SpawnController : MonoBehaviour {
 	// Update is called once per frame
 		void Update () {
 		// move around a bit?
-		shouldDoMove();
-		// Split?
-		shouldSplit();
+		if (!stop){
+			shouldDoMove();
+			// Split?
+			shouldSplit();
 
-		moveFor -= Time.deltaTime;
+			moveFor -= Time.deltaTime;
+			split -= Time.deltaTime;
+		}
 	}
 
 	void shouldDoMove(){
@@ -45,9 +56,6 @@ public class SpawnController : MonoBehaviour {
 				moveFor = Random.Range(stopMin, stopMax);
 			}
 			dirMoving = (SpriteController.DIRECTION)Random.Range(0, 7);
-			string message;
-			message = moving ? "Moving for " + moveFor + " in direction " + dirMoving : "Staying still for " + moveFor;
-			Debug.Log(message);
 			if (ani != null){
             	ani.SetBool("moving", moving);
         	}
@@ -60,6 +68,14 @@ public class SpawnController : MonoBehaviour {
 	}
 
 	void shouldSplit(){
+		if (split <= 0) {
+			split = Random.Range(splitMin, splitMax);
+			GameObject newSpawn = Instantiate(spawner, transform.position,transform.rotation);
+			newSpawn.transform.parent = transform.parent;
+		}
+	}
 
+	public void stopSpawning(){
+		stop = true;
 	}
 }
