@@ -90,9 +90,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveIntMax: 0.5
   moveIntMin: 0.2
+  spawner: {fileID: 1476962323129180}
   stopMax: 5
   stopMin: 2
   speed: 5
+  splitMin: 5
+  splitMax: 10
 --- !u!114 &114958764878375192
 MonoBehaviour:
   m_ObjectHideFlags: 1
