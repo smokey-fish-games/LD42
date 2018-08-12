@@ -70,12 +70,15 @@ public class Enemy : MovingObject
         if (health == 0)
         {
             Debug.Log("enemy destroyed");
-            Destroy(gameObject);
+            Animator a = GetComponent<Animator>();
+            a.SetTrigger("destroy");
+            return;
         }
     }
 
     public void OnDeath()
     {
-        Debug.Log("I'm dyyiinngg");
+        Destroy(gameObject);
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public AttackController attack;
     public float cooldown = 1f;
     public float attackCountdown = 0;
+    public Image img;
 
 
     bool movedByPipe = false;
@@ -79,11 +81,24 @@ public class PlayerController : MonoBehaviour
     public void attackMe(int damage)
     {
         health -= damage;
+        StartCoroutine(FadeImage());
         if (health <= 0)
         {
             // Debug.Log("You Died");
             // TODO: kill da wabbit
             // Destroy(gameObject);
+        }
+    }
+
+    IEnumerator FadeImage()
+    {
+        // fade from opaque to transparent
+        // loop over 1 second backwards
+        for (float i = 0.8f; i >= 0; i -= Time.deltaTime)
+        {
+            // set color with i as alpha
+            img.color = new Color(0.4f, 0, 0, i);
+            yield return null;
         }
     }
 }
