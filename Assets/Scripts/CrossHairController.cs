@@ -10,7 +10,7 @@ public class CrossHairController : MonoBehaviour
     public float cooldown = 4f;
     float curCool = 0.0f;
 
-    public AttackScript attack;
+    public GameObject attack;
 
     Transform rabbit;
     void Update()
@@ -25,7 +25,7 @@ public class CrossHairController : MonoBehaviour
         {
             Debug.Log("Attacking");
             Instantiate(attack, transform.position, Quaternion.identity);
-            attack.SetMousePosition(Input.mousePosition);
+            attack.GetComponent<AttackScript>().SetMousePosition(Input.mousePosition);
             curCool = cooldown;
             return;
         }
