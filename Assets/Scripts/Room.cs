@@ -169,18 +169,24 @@ public class Room : MonoBehaviour
     public Text text;
     // 
     public Animator ani;
+    public GameObject BSOD;
 
     private void FixedUpdate()
     {
         if (visited) {
             visitedOnce = true;
         }
+
+        if (killed){
+            DisableMe();
+            return;
+        }
+
         if (!killed && visitedOnce)
         {
             curTimer += Time.deltaTime;
             if (curTimer > interval)
             {
-
                 SpawnRabbit();
                 curTimer = 0;
             }
@@ -227,11 +233,22 @@ public class Room : MonoBehaviour
     {
         if (CurRabbits >= MaxCapacity)
         {
-            DisableMe();
-            // LOSE
-            //Debug.Log("YOU LOSE SUCKER!");
-            //Application.Quit();
+            if (visited){
+                BSOD.SetActive(true);
+                // Kill all other rooms
+                Room[] allRooms = GameObject.FindObjectsOfType(typeof(Room)) as Room[];
+                foreach (Room derp in allRooms){
+                    Room r = derp.GetComponent<Room>();
+                    r.killIT();
+                    derp.killIT();
+                }
 
+                GameObject go;
+                go = GameObject.FindGameObjectWithTag("GC");
+                BoardManager gm = go.GetComponent<BoardManager>();
+                gm.StopScore();
+            }
+            DisableMe();
         }
     }
 
@@ -252,37 +269,44 @@ public class Room : MonoBehaviour
     }
 
     void initEnemies() {
-        // Spawn IDS
-        IDS = Resources.Load("ids");
-        ANTIVIRUS = Resources.Load("antivirus");
-        FIREWALL = Resources.Load("firewall");
+        if (!startRoom){
+            // Spawn IDS
+            IDS = Resources.Load("ids");
+            ANTIVIRUS = Resources.Load("antivirus");
+            FIREWALL = Resources.Load("firewall");
 
-        Debug.Log("Making " + IDSNum + " IDSSss");
+            Debug.Log("Making " + IDSNum + " IDSSss");
 
-        for (int i = 0; i < IDSNum; i++){
-            GameObject go = Instantiate(IDS, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
-            go.layer = 12;
-        }
+            for (int i = 0; i < IDSNum; i++){
+                GameObject go = Instantiate(IDS, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
+                go.layer = 12;
+            }
 
-        Debug.Log("Making " + FIREWALLNum + " FIREWALLS");
+            Debug.Log("Making " + FIREWALLNum + " FIREWALLS");
 
-        for (int i = 0; i < FIREWALLNum; i++){
-            GameObject go = Instantiate(FIREWALL, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
-            go.layer = 12;
-        }
+            for (int i = 0; i < FIREWALLNum; i++){
+                GameObject go = Instantiate(FIREWALL, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
+                go.layer = 12;
+            }
 
-        Debug.Log("Making " + ANTIVIRUSNum + " ANTIVIRUS");
+            Debug.Log("Making " + ANTIVIRUSNum + " ANTIVIRUS");
 
-        for (int i = 0; i < ANTIVIRUSNum; i++){
+            for (int i = 0; i < ANTIVIRUSNum; i++){
 
-            GameObject go = Instantiate(ANTIVIRUS, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
-            go.layer = 12;
+                GameObject go = Instantiate(ANTIVIRUS, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
+                go.layer = 12;
+            }
         }
     }
 
     public void setEnabled(bool e)
     {
         this.visited = e;
+    }
+
+    public void killIT(){
+        killed = true;
+        DisableMe();
     }
 
 }
