@@ -2,29 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackScript : MonoBehaviour
+public class AttackController : MonoBehaviour
 {
     private Vector2 mousePos;
     public float attackRange = 1f;
+
     public LayerMask blockingLayer;
 
-    // Use this for initialization
-    void Start()
+    public Animator attackAnimator;
+    void Awake()
     {
-        Debug.Log("I AM ALIVE)");
-        Animator a = this.GetComponent<Animator>();
-        a.Play("SwipeAttack");
-        Destroy(gameObject, a.GetCurrentAnimatorStateInfo(0).length);
+        attackAnimator = GetComponent<Animator>();
     }
 
-    public void SetMousePosition(Vector3 mousePosition)
+
+    public void attemptAttack()
     {
-        mousePos = mousePosition;
+        Debug.Log("Attempt attack");
+
+        Debug.Log("attack countdown finished");
+        mousePos = Input.mousePosition;
+        attackEnemy();
+        return;
+
     }
 
     public void attackEnemy()
     {
         Vector2 start = transform.position;
+
+        attackAnimator.SetTrigger("Active");
 
         if (transform.position.magnitude > attackRange)
         {
@@ -35,7 +42,7 @@ public class AttackScript : MonoBehaviour
         Vector2 end = start + mousePos;
 
         // disable collider so we don't hit it whilst looking out
-        Collider2D col2d = GetComponent<Collider2D>();
+        Collider2D col2d = GetComponentInParent<Collider2D>();
         col2d.enabled = false;
         // check for collisions in a straight line between start and end
         // on blockingLayer

@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public SpriteController controller;
     public Collider2D col;
     public int health = 3;
+    public AttackController attack;
+    public float cooldown = 1f;
+    public float attackCountdown = 0;
 
 
     bool movedByPipe = false;
@@ -23,12 +26,23 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
         controller.MOVEUP = false;
         controller.MOVEDOWN = false;
         controller.MOVELEFT = false;
         controller.MOVERIGHT = false;
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (attackCountdown <= 0)
+            {
+                Debug.Log("button down");
+                attack.attemptAttack();
+                attackCountdown = cooldown;
+                return;
+            }
+        }
+        attackCountdown -= Time.deltaTime;
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
         if (h > 0)
         {

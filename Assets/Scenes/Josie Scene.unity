@@ -385,6 +385,48 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f638f77b19054355863bb1043831520, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1001 &559359328
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1596012981}
+    m_Modifications:
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918848535295206, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d955d23fc707db544956a32e7ce88e2a, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &607185218
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +541,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &627273960 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114698434187809342, guid: d955d23fc707db544956a32e7ce88e2a,
+    type: 2}
+  m_PrefabInternal: {fileID: 559359328}
+  m_Script: {fileID: 11500000, guid: 48766a5a0b250f2419351101700e9a88, type: 3}
 --- !u!1001 &930159415
 Prefab:
   m_ObjectHideFlags: 0
@@ -914,6 +962,15 @@ Prefab:
       value: 
       objectReference: {fileID: 1646205978558086, guid: 77736d90df83bfd4ba30d84219c31be3,
         type: 2}
+    - target: {fileID: 1436184394925604, guid: 17ae27f7dddd1144293beca21a4a0b53, type: 2}
+      propertyPath: m_Name
+      value: Crosshair
+      objectReference: {fileID: 0}
+    - target: {fileID: 114252275928295792, guid: 17ae27f7dddd1144293beca21a4a0b53,
+        type: 2}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 627273960}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17ae27f7dddd1144293beca21a4a0b53, type: 2}
   m_IsPrefabAsset: 0
