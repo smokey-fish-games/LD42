@@ -28,11 +28,9 @@ public class Room : MonoBehaviour
 
     private Bounds bounds;
 
-    bool disabledRoom = false;
-
     private Transform in_location;
 
-    public bool enabled = false;
+    public bool visited = false;
 
     public Room(Vector2 position, IntVector2 size)
     {
@@ -124,9 +122,6 @@ public class Room : MonoBehaviour
         input_pipe = Instantiate(pipe_resource, pos_in, Quaternion.identity) as GameObject;
         output_pipe = Instantiate(pipe_resource, pos_out, Quaternion.identity) as GameObject;
 
-        PipeController i = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
-        PipeController o = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
-
         input_pipe.transform.parent = transform;
         output_pipe.transform.parent = transform;
 
@@ -167,7 +162,7 @@ public class Room : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (enabled)
+        if (visited)
         {
             curTimer += Time.deltaTime;
             if (curTimer > interval)
@@ -244,7 +239,7 @@ public class Room : MonoBehaviour
 
     public void setEnabled(bool e)
     {
-        this.enabled = e;
+        this.visited = e;
     }
 
 }

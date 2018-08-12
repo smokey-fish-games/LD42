@@ -908,6 +908,12 @@ Prefab:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 114937735504909320, guid: 17ae27f7dddd1144293beca21a4a0b53,
+        type: 2}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 1646205978558086, guid: 77736d90df83bfd4ba30d84219c31be3,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17ae27f7dddd1144293beca21a4a0b53, type: 2}
   m_IsPrefabAsset: 0

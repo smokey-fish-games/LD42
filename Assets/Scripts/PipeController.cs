@@ -8,16 +8,14 @@ public class PipeController : MonoBehaviour
     public Transform destination;
     public bool isActive = true;
     Collider2D col;
-    SpriteRenderer sp;
-
     public Room parent;
     public Room destination_room;
 
     Animator ani;
 
-    private void Start() {
+    private void Start()
+    {
         col = gameObject.GetComponent<Collider2D>();
-        sp = gameObject.GetComponent<SpriteRenderer>();
         ani = GetComponent<Animator>();
     }
 
@@ -51,10 +49,12 @@ public class PipeController : MonoBehaviour
         }
     }
 
-    public void setActive(bool active, bool notifypartner) {
+    public void setActive(bool active, bool notifypartner)
+    {
         isActive = active;
         PipeController OtherPipe = destination.GetComponent<PipeController>();
-        if (notifypartner){
+        if (notifypartner)
+        {
             OtherPipe.setActive(isActive, false);
         }
         ani.SetBool("active", active);
