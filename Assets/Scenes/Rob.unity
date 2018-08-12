@@ -504,7 +504,7 @@ Prefab:
     - target: {fileID: 114543828623502040, guid: 683c3059d40064245ae6677cfa350d5f,
         type: 2}
       propertyPath: num_rooms
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114543828623502040, guid: 683c3059d40064245ae6677cfa350d5f,
         type: 2}
