@@ -10,6 +10,9 @@ public class PipeController : MonoBehaviour
     Collider2D col;
     SpriteRenderer sp;
 
+    public Room parent;
+    public Room destination_room;
+
     private void Start() {
         col = gameObject.GetComponent<Collider2D>();
         sp = gameObject.GetComponent<SpriteRenderer>();
@@ -31,6 +34,10 @@ public class PipeController : MonoBehaviour
                     pc.SetMove(true);
                     col.enabled = false;
                     other.transform.position = destination.position;
+
+                    parent.setEnabled(false);
+                    destination_room.setEnabled(true);
+                    destination_room.updateUI();
                 }
                 else
                 {
