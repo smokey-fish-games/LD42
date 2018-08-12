@@ -22,6 +22,9 @@ public class Room : MonoBehaviour
     private Transform boardHolder;
 
     private UnityEngine.Object pipe_resource;
+    private UnityEngine.Object IDS;
+    private UnityEngine.Object FIREWALL;
+    private UnityEngine.Object ANTIVIRUS;
 
     public GameObject input_pipe;
     public GameObject output_pipe;
@@ -31,6 +34,10 @@ public class Room : MonoBehaviour
     private Transform in_location;
 
     public bool visited = false;
+
+    public int IDSNum = 3;
+    public int FIREWALLNum = 3;
+    public int ANTIVIRUSNum = 3;
 
     public Room(Vector2 position, IntVector2 size)
     {
@@ -52,6 +59,7 @@ public class Room : MonoBehaviour
     public void Start()
     {
         initBoard();
+        initEnemies();
     }
 
     public void initBoard()
@@ -234,7 +242,35 @@ public class Room : MonoBehaviour
         {
             s.stopSpawning();
         }
+    }
 
+    void initEnemies() {
+        // Spawn IDS
+        IDS = Resources.Load("ids");
+        ANTIVIRUS = Resources.Load("antivirus");
+        FIREWALL = Resources.Load("firewall");
+
+        Debug.Log("Making " + IDSNum + " IDSSss");
+
+        for (int i = 0; i < IDSNum; i++){
+            GameObject go = Instantiate(IDS, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
+            go.layer = 12;
+        }
+
+        Debug.Log("Making " + FIREWALLNum + " FIREWALLS");
+
+        for (int i = 0; i < FIREWALLNum; i++){
+            GameObject go = Instantiate(FIREWALL, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
+            go.layer = 12;
+        }
+
+        Debug.Log("Making " + ANTIVIRUSNum + " ANTIVIRUS");
+
+        for (int i = 0; i < ANTIVIRUSNum; i++){
+
+            GameObject go = Instantiate(ANTIVIRUS, room_position + new Vector2(room_size.X /2, room_size.Y /2), transform.rotation, transform) as GameObject;
+            go.layer = 12;
+        }
     }
 
     public void setEnabled(bool e)
