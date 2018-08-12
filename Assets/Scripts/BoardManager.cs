@@ -93,7 +93,7 @@ public class BoardManager : MonoBehaviour
 
     private void connect_rooms(Room r1, Room r2)
     {
-        r1.connectOutPipe(r2.getInLocation());
-        r2.connectInPipe(r1.getOutLocation());      
+        r1.connectOutPipe(r2);
+        r2.connectInPipe(r1);      
     }
 }
