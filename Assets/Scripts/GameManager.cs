@@ -5,18 +5,19 @@ using UnityEngine.SceneManagement;
 
 
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     private BoardManager boardScript = new BoardManager();
 
-    private int level = 1;
-
-    void Awake() {
+    void Awake()
+    {
         boardScript = GetComponent<BoardManager>();
         InitGame();
     }
 
-    void InitGame() {
+    void InitGame()
+    {
         Debug.Log("Starting Game");
         boardScript.SetupScene();
     }

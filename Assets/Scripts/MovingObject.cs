@@ -5,20 +5,18 @@ using UnityEngine;
 public abstract class MovingObject : MonoBehaviour
 {
 
-    public float moveTime = 0.1f;
-    public float detectionRadius = 0.3f;
+    public float moveTime = 1f;
+    abstract public float detectionRadius { get; set; }
     public LayerMask blockingLayer;
 
     private Collider2D col2D;
     private Rigidbody2D rb2D;
-    private float inverseMoveTime;
 
     // Use this for initialization
     protected virtual void Start()
     {
         col2D = GetComponent<Collider2D>();
         rb2D = GetComponent<Rigidbody2D>();
-        inverseMoveTime = 1f / moveTime;
     }
 
     // 'out' means pass by reference so we can return multiple values
@@ -51,9 +49,9 @@ public abstract class MovingObject : MonoBehaviour
         // sqrMagnitude is cheaper to calculate apparently
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
-        while (sqrRemainingDistance > detectionRadius)
+        while (sqrRemainingDistance - detectionRadius > float.Epsilon)
         {
-            Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
+            Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, moveTime * Time.deltaTime);
             rb2D.MovePosition(newPosition);
             // recalculate remaining distance
             sqrRemainingDistance = (transform.position - end).sqrMagnitude;
@@ -74,7 +72,6 @@ public abstract class MovingObject : MonoBehaviour
         // we don't know what type of hit component we're going to get
         // so keep this generic
         T hitComponent = hit.transform.GetComponent<T>();
-
         if (!canMove && hitComponent != null)
             OnCantMove(hitComponent);
     }

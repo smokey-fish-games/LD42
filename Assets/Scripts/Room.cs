@@ -28,21 +28,20 @@ public class Room : MonoBehaviour
 
     private Bounds bounds;
 
-    bool disabledRoom = false;
-
     private Transform in_location;
 
-    public bool enabled = false;
+    public bool visited = false;
 
     public Room(Vector2 position, IntVector2 size)
-{ 
+    {
         this.room_position = position;
         this.room_size = size;
 
         initBoard();
     }
 
-    public Vector2 getFullSize() {
+    public Vector2 getFullSize()
+    {
         Vector2 full_size = new Vector2((this.room_size.X + 2) * bounds.size.x, (this.room_size.Y + 2) * bounds.size.y);
         // Debug.Log("room_size.x: " + this.room_size.X);
         // Debug.Log("bounds_size.x: " + this.bounds.size.x);
@@ -92,26 +91,28 @@ public class Room : MonoBehaviour
         }
         if (startRoom)
         {
-            spawnPlayer();
+            setPlayerStart();
         }
     }
 
-    public void spawnPlayer()
+    public void setPlayerStart()
     {
         float posx = room_position.x + room_size.X * 0.5f;
         float posy = room_position.y + room_size.Y * 0.5f;
         player.transform.position = new Vector3(posx, posy, 0);
     }
 
-    public Transform getInLocation() 
+    public Transform getInLocation()
     {
         return input_pipe.transform;
     }
-    
-    public Transform getOutLocation() {
+
+    public Transform getOutLocation()
+    {
         return output_pipe.transform;
     }
-    public void initPipes() {
+    public void initPipes()
+    {
 
         pipe_resource = Resources.Load("Pipe");
 
@@ -121,9 +122,6 @@ public class Room : MonoBehaviour
         input_pipe = Instantiate(pipe_resource, pos_in, Quaternion.identity) as GameObject;
         output_pipe = Instantiate(pipe_resource, pos_out, Quaternion.identity) as GameObject;
 
-        PipeController i = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
-        PipeController o = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
-
         input_pipe.transform.parent = transform;
         output_pipe.transform.parent = transform;
 
@@ -131,7 +129,8 @@ public class Room : MonoBehaviour
         // output_pipe.transform.SetParent(boardHolder);
     }
 
-    public void connectInPipe (Room destination) {
+    public void connectInPipe(Room destination)
+    {
         PipeController pc = input_pipe.GetComponent(typeof(PipeController)) as PipeController;
 
         pc.destination = destination.getOutLocation();
@@ -139,7 +138,8 @@ public class Room : MonoBehaviour
         pc.destination_room = destination;
     }
 
-    public void connectOutPipe (Room destination) {
+    public void connectOutPipe(Room destination)
+    {
         PipeController pc = output_pipe.GetComponent(typeof(PipeController)) as PipeController;
 
         pc.destination = destination.getInLocation();
@@ -147,85 +147,99 @@ public class Room : MonoBehaviour
         pc.destination_room = destination;
     }
 
-	public Transform slocation;
-	public GameObject rabbit;
-	public float interval = 1;
-	public float curTimer = 0;
+    public Transform slocation;
+    public GameObject rabbit;
+    public float interval = 1;
+    public float curTimer = 0;
 
-	float CurRabbits = 0;
-	public float MaxCapacity = 20;
+    float CurRabbits = 0;
+    public float MaxCapacity = 20;
 
-	public Slider slider;
-	public Text text;
+    public Slider slider;
+    public Text text;
     // 
-	public Animator ani;
+    public Animator ani;
 
-	private void FixedUpdate() {
-        if (enabled) {
+    private void FixedUpdate()
+    {
+        if (visited)
+        {
             curTimer += Time.deltaTime;
-            if (curTimer > interval) {
-                
+            if (curTimer > interval)
+            {
+
                 SpawnRabbit();
                 curTimer = 0;
             }
             checkLose();
         }
-	}	
+    }
 
-	void SpawnRabbit(){
+    void SpawnRabbit()
+    {
         // Count the rabbits
         CurRabbits = GetComponentsInChildren<SpawnController>().Length;
 
 
         //Debug.Log(player.transform.position);
-		GameObject go = Instantiate(rabbit, player.transform.position, player.transform.rotation);
+        GameObject go = Instantiate(rabbit, player.transform.position, player.transform.rotation);
         go.transform.parent = transform;
-		go.layer = 12;
+        go.layer = 12;
 
         CurRabbits++;
 
 
         updateUI();
-	}
-
-    public void updateUI() {
-         slider.value = CurRabbits / MaxCapacity;
-		float perc = Mathf.Round((CurRabbits / MaxCapacity) * 100);
-		text.text = "" + perc  + "%";
-		if (perc >= 75) {
-			// Set animator alert
-			ani.SetBool("Alarm", true);
-		} else {
-			// Set animator to not alert
-			ani.SetBool("Alarm", false);
-		}       
     }
 
-	void checkLose(){
-		if (CurRabbits >= MaxCapacity) {
-			DisableMe();
-			// LOSE
-			//Debug.Log("YOU LOSE SUCKER!");
-			//Application.Quit();
+    public void updateUI()
+    {
+        slider.value = CurRabbits / MaxCapacity;
+        float perc = Mathf.Round((CurRabbits / MaxCapacity) * 100);
+        text.text = "" + perc + "%";
+        if (perc >= 75)
+        {
+            // Set animator alert
+            ani.SetBool("Alarm", true);
+        }
+        else
+        {
+            // Set animator to not alert
+            ani.SetBool("Alarm", false);
+        }
+    }
 
-		}
-	}
+    void checkLose()
+    {
+        if (CurRabbits >= MaxCapacity)
+        {
+            DisableMe();
+            // LOSE
+            //Debug.Log("YOU LOSE SUCKER!");
+            //Application.Quit();
 
-	void DisableMe(){
+        }
+    }
+
+    void DisableMe()
+    {
         setEnabled(false);
         // tell pipes to stop
-		foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>()) {
-				p.setActive(false, true);
-		}
+        foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>())
+        {
+            p.setActive(false, true);
+        }
         // tell rabbits to stop
-        foreach (SpawnController s in gameObject.GetComponentsInChildren<SpawnController>()) {
+        foreach (SpawnController s in gameObject.GetComponentsInChildren<SpawnController>())
+        {
             s.stopSpawning();
         }
 
-	}
+    }
 
-    public void setEnabled(bool e) {
-        this.enabled = e;
+    public void setEnabled(bool e)
+    {
+        this.visited = e;
     }
 
 }
