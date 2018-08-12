@@ -22,7 +22,12 @@ public class BoardManager : MonoBehaviour
 	public Text text;
 	public Animator ani;
 
-    public int interval = 1;
+    public float interval = 1;
+    public float intervalMax = 1;
+    public float intervalMin = 0.5f;
+
+    public int minEnemy = 0;
+    public int maxEnemy = 4;
 
     public void SetupScene()
     {
@@ -54,7 +59,7 @@ public class BoardManager : MonoBehaviour
             }
             r.rabbit = this.rabbit;
             r.player = this.player;
-            r.interval = this.interval;
+            r.interval = Random.Range(intervalMin, intervalMax);
 
             r.slider = this.slider;
             r.text = this.text;
@@ -62,6 +67,10 @@ public class BoardManager : MonoBehaviour
             r.ani = this.ani;
 
             r.MaxCapacity = 20;
+
+            r.IDSNum = Random.Range(minEnemy, maxEnemy);
+            r.FIREWALLNum =Random.Range(minEnemy, maxEnemy);
+            r.ANTIVIRUSNum = Random.Range(minEnemy, maxEnemy);
 
             r.initBoard();
             rooms.Add(go);

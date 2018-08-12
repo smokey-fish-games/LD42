@@ -37,7 +37,6 @@ public class SpriteController : MonoBehaviour
             case DIRECTION.RIGHT:
                 newpos = Vector2.right;
                 break;
-
             case DIRECTION.UPLEFT:
                 newpos = Vector2.up + Vector2.left;
                 break;
