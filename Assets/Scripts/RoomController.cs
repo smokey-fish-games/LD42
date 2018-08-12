@@ -28,8 +28,6 @@ public class RoomController : MonoBehaviour {
 		checkLose();
 	}	
 
-
-
 	void SpawnRabbit(){
 		CurRabbits++;
 		Instantiate(rabbit, slocation.position, slocation.rotation);
