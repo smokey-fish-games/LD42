@@ -25,6 +25,7 @@ public class CrossHairController : MonoBehaviour
         {
             Debug.Log("Attacking");
             Instantiate(attack, transform.position, Quaternion.identity);
+            // set the position of the mouse on click
             attack.GetComponent<AttackScript>().SetMousePosition(Input.mousePosition);
             curCool = cooldown;
             return;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-
     private Vector2 mousePos;
     public float attackRange = 1f;
     public LayerMask blockingLayer;
