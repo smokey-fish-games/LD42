@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50607624099268508}
   - component: {fileID: 114252275928295792}
   - component: {fileID: 70164041961524798}
+  - component: {fileID: 95858501417913598}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Player
@@ -101,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436184394925604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.122, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4399713714801614}
@@ -158,7 +159,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -189,6 +190,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1569925549171434}
   m_Enabled: 1
+--- !u!95 &95858501417913598
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1361380976265972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 793a95db5c95164409241e341126f762, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114084783820927860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 114084783820927860}
-  co: {fileID: 70164041961524798}
+  col: {fileID: 0}
 --- !u!114 &114937735504909320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,6 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
+  cooldown: 0
+  attack: {fileID: 1646205978558086, guid: 77736d90df83bfd4ba30d84219c31be3, type: 2}
 --- !u!212 &212585326569558074
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -322,7 +343,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: e4d3546adcb28164d9cbfbc6ffeb5ef6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6db2b3f17864064dad1f7b8b6a5f052, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
