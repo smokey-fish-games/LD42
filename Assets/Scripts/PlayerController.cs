@@ -6,11 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public SpriteController controller;
     public Collider2D col;
-    float h, v;
+    public int health = 3;
+
 
     bool movedByPipe = false;
-
-    // Update is called once per frame
 
     //SetMove
     public void SetMove(bool move)
@@ -24,13 +23,13 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
         controller.MOVEUP = false;
         controller.MOVEDOWN = false;
         controller.MOVELEFT = false;
         controller.MOVERIGHT = false;
 
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
         if (h > 0)
         {
             controller.MOVERIGHT = true;
@@ -54,12 +53,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     void OnTriggerExit2D(Collider2D other)
     {
         Debug.Log("Player trigger Exit");
         if (other.tag == "Pipe")
         {
             movedByPipe = false;
+        }
+    }
+
+    public void attackMe(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Debug.Log("You Died");
+            // TODO: kill da wabbit
+            // Destroy(gameObject);
         }
     }
 }
