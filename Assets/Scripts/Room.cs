@@ -34,6 +34,8 @@ public class Room : MonoBehaviour
     private Transform in_location;
 
     public bool visited = false;
+    bool visitedOnce = false;
+    public bool killed = false;
 
     public int IDSNum = 3;
     public int FIREWALLNum = 3;
@@ -170,7 +172,10 @@ public class Room : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (visited)
+        if (visited) {
+            visitedOnce = true;
+        }
+        if (!killed && visitedOnce)
         {
             curTimer += Time.deltaTime;
             if (curTimer > interval)
@@ -196,8 +201,9 @@ public class Room : MonoBehaviour
 
         CurRabbits++;
 
-
-        updateUI();
+        if (visited) {
+            updateUI();
+        }
     }
 
     public void updateUI()
@@ -232,6 +238,7 @@ public class Room : MonoBehaviour
     void DisableMe()
     {
         setEnabled(false);
+        killed = true;
         // tell pipes to stop
         foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>())
         {
