@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4189567458687828}
   - component: {fileID: 212313599903785808}
   - component: {fileID: 70035532160951608}
+  - component: {fileID: 95056501818339054}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -56,6 +57,24 @@ CapsuleCollider2D:
   m_Offset: {x: -0.053791948, y: -0.25755128}
   m_Size: {x: 0.8594517, y: 0.2106817}
   m_Direction: 1
+--- !u!95 &95056501818339054
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476962323129180}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1b150f30198b834b98ea9bb3a6709b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &212313599903785808
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -91,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: a13783d8799227f42b8a76451dc06a20, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a9d6ec4b4164864fa870f81c80daf8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

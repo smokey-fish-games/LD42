@@ -13,8 +13,15 @@ public class SpriteController : MonoBehaviour
     public bool MOVERIGHT = false;
     public float speed = 10f;
 
+    bool moving = false;
+
+    Animator ani;
+    private void Start() {
+        ani = GetComponent<Animator>();
+    }
     public void Move(DIRECTION direction)
     {
+        moving = true;
         Vector2 newpos = new Vector2();
         switch (direction)
         {
@@ -56,6 +63,7 @@ public class SpriteController : MonoBehaviour
     /// </summary>
     void Update()
     {
+        moving = false;
         if (MOVEUP && MOVELEFT)
         {
             Move(DIRECTION.UPLEFT);
@@ -87,6 +95,9 @@ public class SpriteController : MonoBehaviour
         else if (MOVERIGHT)
         {
             Move(DIRECTION.RIGHT);
+        }
+        if (ani != null){
+            ani.SetBool("moving", moving);
         }
     }
 }
