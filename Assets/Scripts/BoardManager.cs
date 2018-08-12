@@ -26,6 +26,8 @@ public class BoardManager : MonoBehaviour
 
     int CurScore = 0;
 
+    List<Room> allRooms;
+
     public float interval = 1;
     public float intervalMax = 1;
     public float intervalMin = 0.5f;
@@ -35,6 +37,7 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene()
     {
+        allRooms = new List<Room>();
 
         Object room = Resources.Load("Room");
 
@@ -53,6 +56,7 @@ public class BoardManager : MonoBehaviour
             go.transform.parent = transform.parent;
 
             Room r = go.GetComponent(typeof(Room)) as Room;
+            allRooms.Add(r);
             r.transform.parent = transform.parent;
             r.room_position = pos;
             r.room_size = size;
@@ -117,6 +121,22 @@ public class BoardManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        if (allRooms != null) {
+            int countScore = 0;
+            foreach (Room r in allRooms) {
+                // count da rabbits
+                countScore += r.GetComponentsInChildren<SpawnController>().Length;
+
+                // check for dead rooms
+                if (r.killed) {
+                    countScore += 100;
+                }
+            }
+
+            // got the score... update!
+            CurScore = countScore;
+        }
+
+        score.text = "" + CurScore;
     }
 }
