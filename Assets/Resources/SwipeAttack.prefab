@@ -87,6 +87,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48766a5a0b250f2419351101700e9a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 1
+  blockingLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &212521218395521174
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -121,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
