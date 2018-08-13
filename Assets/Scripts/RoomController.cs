@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomController : MonoBehaviour {
+public class RoomController : MonoBehaviour
+{
 
 	public Transform slocation;
 	public GameObject rabbit;
@@ -19,32 +20,41 @@ public class RoomController : MonoBehaviour {
 
 	public Animator ani;
 
-	private void FixedUpdate() {
+	private void FixedUpdate()
+	{
 		curTimer += Time.deltaTime;
-		if (curTimer >= interval) {
+		if (curTimer >= interval)
+		{
 			SpawnRabbit();
 			curTimer = 0;
 		}
 		checkLose();
-	}	
+	}
 
-	void SpawnRabbit(){
+	void SpawnRabbit()
+	{
 		CurRabbits++;
-		Instantiate(rabbit, slocation.position, slocation.rotation);
+		GameObject spawn = Instantiate(rabbit, slocation.position, slocation.rotation);
+		spawn.layer = 0;
 		slider.value = CurRabbits / MaxCapacity;
 		float perc = Mathf.Round((CurRabbits / MaxCapacity) * 100);
-		text.text = "" + perc  + "%";
-		if (perc >= 75) {
+		text.text = "" + perc + "%";
+		if (perc >= 75)
+		{
 			// Set animator alert
 			ani.SetBool("Alarm", true);
-		} else {
+		}
+		else
+		{
 			// Set animator to not alert
 			ani.SetBool("Alarm", false);
 		}
 	}
 
-	void checkLose(){
-		if (CurRabbits >= MaxCapacity) {
+	void checkLose()
+	{
+		if (CurRabbits >= MaxCapacity)
+		{
 			DisableMe();
 			// LOSE
 			Debug.Log("YOU LOSE SUCKER!");
@@ -53,9 +63,11 @@ public class RoomController : MonoBehaviour {
 		}
 	}
 
-	void DisableMe(){
-		foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>()) {
-				p.setActive(false, true);
+	void DisableMe()
+	{
+		foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>())
+		{
+			p.setActive(false, true);
 		}
 	}
 }

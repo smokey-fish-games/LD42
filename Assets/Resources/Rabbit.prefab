@@ -208,9 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 114084783820927860}
   col: {fileID: 70164041961524798}
-  health: 3
   attack: {fileID: 114490768091050108}
-  cooldown: 1
+  cooldown: 0.1
   attackCountdown: 0
   img: {fileID: 0}
 --- !u!114 &114490768091050108
@@ -224,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48766a5a0b250f2419351101700e9a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1
+  attackRange: 3
   blockingLayer:
     serializedVersion: 2
     m_Bits: 4096

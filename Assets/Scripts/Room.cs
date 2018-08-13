@@ -15,8 +15,6 @@ public class Room : MonoBehaviour
 	public GameObject[] wallTiles;
 	public GameObject player;
 
-	public bool startRoom;
-
 	private Transform boardHolder;
 
 	private UnityEngine.Object pipe_resource;
@@ -39,6 +37,7 @@ public class Room : MonoBehaviour
 	public int IDSNum = 3;
 	public int FIREWALLNum = 3;
 	public int ANTIVIRUSNum = 3;
+	public int level;
 
 	public Room(Vector2 position, IntVector2 size)
 	{
@@ -98,7 +97,7 @@ public class Room : MonoBehaviour
 				instance.transform.SetParent(boardHolder);
 			}
 		}
-		if (startRoom)
+		if (level == 0)
 		{
 			setPlayerStart();
 		}
@@ -211,6 +210,11 @@ public class Room : MonoBehaviour
 		{
 			p.setLocked(lockedPipes);
 		}
+		// always disable the pipe from the last room in the first room
+		if (level == 0)
+		{
+			input_pipe.SetActive(false);
+		}
 	}
 
 	void SpawnRabbit()
@@ -287,18 +291,34 @@ public class Room : MonoBehaviour
 
 	void initEnemies()
 	{
-		if (!startRoom)
+		if (level > 0)
 		{
 			// Spawn IDS
 			IDS = Resources.Load("ids");
 			ANTIVIRUS = Resources.Load("antivirus");
 			FIREWALL = Resources.Load("firewall");
 
-			Debug.Log("Making " + IDSNum + " IDSSss");
+			// Make levels harder by adding more enemies 
+			int div = level / 3;
+			int mod = level % 3;
+			if (mod == 0)
+			{
+				IDSNum += div;
+			}
+			if (mod < 2)
+			{
+				ANTIVIRUSNum += div;
+			}
+			else
+			{
+				FIREWALLNum += div;
+			}
+			Debug.Log("Level: " + level + ". Making " + IDSNum + " IDSSss");
+			Vector2 startPos = room_position + new Vector2(room_size.X, room_size.Y / 2);
 
 			for (int i = 0; i < IDSNum; i++)
 			{
-				GameObject go = Instantiate(IDS, room_position + new Vector2(room_size.X / 2, room_size.Y / 2), transform.rotation, transform) as GameObject;
+				GameObject go = Instantiate(IDS, startPos, transform.rotation, transform) as GameObject;
 				go.layer = 12;
 			}
 
@@ -306,7 +326,7 @@ public class Room : MonoBehaviour
 
 			for (int i = 0; i < FIREWALLNum; i++)
 			{
-				GameObject go = Instantiate(FIREWALL, room_position + new Vector2(room_size.X / 2, room_size.Y / 2), transform.rotation, transform) as GameObject;
+				GameObject go = Instantiate(FIREWALL, startPos, transform.rotation, transform) as GameObject;
 				go.layer = 12;
 			}
 
@@ -315,7 +335,7 @@ public class Room : MonoBehaviour
 			for (int i = 0; i < ANTIVIRUSNum; i++)
 			{
 
-				GameObject go = Instantiate(ANTIVIRUS, room_position + new Vector2(room_size.X / 2, room_size.Y / 2), transform.rotation, transform) as GameObject;
+				GameObject go = Instantiate(ANTIVIRUS, startPos, transform.rotation, transform) as GameObject;
 				go.layer = 12;
 			}
 		}
