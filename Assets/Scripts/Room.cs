@@ -139,6 +139,7 @@ public class Room : MonoBehaviour
 
 		input_pipe.transform.parent = transform;
 		output_pipe.transform.parent = transform;
+		input_pipe.GetComponent<SpriteRenderer>().color = Color.red;
 
 		// input_pipe.transform.SetParent(boardHolder);
 		// output_pipe.transform.SetParent(boardHolder);
