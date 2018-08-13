@@ -82,17 +82,14 @@ public class BoardManager : MonoBehaviour
 
 			r.MaxCapacity = Mathf.Round(10 + (50 * (intervalMax - r.interval)));
 
-			r.IDSNum = Random.Range(minEnemy, maxEnemy);
-			r.FIREWALLNum = Random.Range(minEnemy, maxEnemy);
-			r.ANTIVIRUSNum = Random.Range(minEnemy, maxEnemy);
+			r.IDSNum = Random.Range(minEnemy + i, maxEnemy + i);
+			r.FIREWALLNum = Random.Range(minEnemy + i, maxEnemy + i);
+			r.ANTIVIRUSNum = Random.Range(minEnemy + i, maxEnemy + i);
 
 			r.initBoard();
 			rooms.Add(go);
 
 			pos.x += r.getFullSize().x + 2;
-
-			Debug.Log("Pos is: " + pos.x);
-
 		}
 
 		for (int i = 0; i < rooms.Count; i++)
