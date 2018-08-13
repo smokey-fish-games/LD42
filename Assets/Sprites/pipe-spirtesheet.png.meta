@@ -4,6 +4,13 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: pipe-spirtesheet_0
     21300002: pipe-spirtesheet_1
+    21300004: pipe-spirtesheet_2
+    21300006: pipe-spirtesheet_3
+    21300008: pipe-spirtesheet_4
+    21300010: pipe-spirtesheet_5
+    21300012: pipe-spirtesheet_6
+    21300014: pipe-spirtesheet_7
+    21300016: pipe-spirtesheet_8
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -111,7 +118,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59eb066bf0605d249b88dec64e029db7
+      spriteID: 73ff93b16ea153445a72f20a889844a3
       vertices: []
       indices: 
       edges: []
@@ -131,7 +138,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: daca50a453bda164e9b0da362bcbaf85
+      spriteID: 569a52be9ad7a6c4cacf09fad1512b11
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pipe-spirtesheet_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c89ba7c73918ded4b975f213df0bbe5e
       vertices: []
       indices: 
       edges: []

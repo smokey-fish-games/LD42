@@ -76,6 +76,7 @@ public class BoardManager : MonoBehaviour
 
             r.slider = this.slider;
             r.text = this.text;
+            // WHY CHRIS
             //https://youtu.be/DDGpwuMAmVs?t=24s
             r.ani = this.ani;
 

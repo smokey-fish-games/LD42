@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114543828623502040}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,4 +69,11 @@ MonoBehaviour:
   slider: {fileID: 0}
   text: {fileID: 0}
   ani: {fileID: 0}
+  score: {fileID: 0}
+  finalScore: {fileID: 0}
+  BSOD: {fileID: 0}
   interval: 1
+  intervalMax: 1.5
+  intervalMin: 0.5
+  minEnemy: 0
+  maxEnemy: 4

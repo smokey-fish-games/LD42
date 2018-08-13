@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 2
-  detectionRadius: 0.1
+  detectionRadius: 0.4
   blockingLayer:
     serializedVersion: 2
     m_Bits: 4096
