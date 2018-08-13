@@ -12,142 +12,146 @@ using System.Linq;
 public class BoardManager : MonoBehaviour
 {
 
-    private List<GameObject> rooms = new List<GameObject>();
+	private List<GameObject> rooms = new List<GameObject>();
 
 
-    public int num_rooms = 1;
-    public GameObject player;
-    public GameObject rabbit;
+	public int num_rooms = 1;
+	public GameObject player;
+	public GameObject rabbit;
 
 	public Slider slider;
 	public Text text;
 	public Animator ani;
 
-    bool stopScore = false;
-    public Text score;
-    public Text finalScore;
-    public GameObject BSOD;
+	bool stopScore = false;
+	public Text score;
+	public Text finalScore;
+	public GameObject BSOD;
 
-    int CurScore = 0;
+	int CurScore = 0;
 
-    List<Room> allRooms;
+	List<Room> allRooms;
 
-    public float interval = 1;
-    public float intervalMax = 1.5f;
-    public float intervalMin = 0.5f;
+	public float interval = 1;
+	public float intervalMax = 1.5f;
+	public float intervalMin = 0.5f;
 
-    public int minEnemy = 0;
-    public int maxEnemy = 4;
+	public int minEnemy = 0;
+	public int maxEnemy = 2;
 
-    public void SetupScene()
-    {
-        allRooms = new List<Room>();
+	public void SetupScene()
+	{
+		allRooms = new List<Room>();
 
-        Object room = Resources.Load("Room");
+		Object room = Resources.Load("Room");
 
-        Debug.Log("Will create rooms: " + num_rooms);
+		Debug.Log("Will create rooms: " + num_rooms);
 
-        Vector2 pos = new Vector2(0,0);
+		Vector2 pos = new Vector2(0, 0);
 
-        for (int i = 0; i < num_rooms; i++)
-	    {
-            Debug.Log("Creating room: " + i);
+		for (int i = 0; i < num_rooms; i++)
+		{
+			Debug.Log("Creating room: " + i);
 
-            IntVector2 size = new IntVector2(Random.Range(3, 10),Random.Range(3, 10));
+			IntVector2 size = new IntVector2(Random.Range(3, 10), Random.Range(3, 10));
 
-            GameObject go = Instantiate(room) as GameObject;
-            go.layer = 12;
-            go.transform.parent = transform.parent;
+			GameObject go = Instantiate(room) as GameObject;
+			go.layer = 12;
+			go.transform.parent = transform.parent;
 
-            Room r = go.GetComponent(typeof(Room)) as Room;
-            allRooms.Add(r);
-            r.transform.parent = transform.parent;
-            r.room_position = pos;
-            r.room_size = size;
-            if (i == 0)
-            {
-                r.startRoom = true;
-                r.player = player;
-            }
-            r.rabbit = this.rabbit;
-            r.player = this.player;
-            r.interval = Random.Range(intervalMin, intervalMax);
-            r.BSOD = BSOD;
+			Room r = go.GetComponent(typeof(Room)) as Room;
+			allRooms.Add(r);
+			r.transform.parent = transform.parent;
+			r.room_position = pos;
+			r.room_size = size;
+			r.level = i;
+			if (i == 0)
+			{
+				r.player = player;
+			}
+			r.rabbit = this.rabbit;
+			r.player = this.player;
+			r.interval = Random.Range(intervalMin, intervalMax);
+			r.BSOD = BSOD;
 
-            r.slider = this.slider;
-            r.text = this.text;
-            // WHY CHRIS
-            //https://youtu.be/DDGpwuMAmVs?t=24s
-            r.ani = this.ani;
+			r.slider = this.slider;
+			r.text = this.text;
+			// WHY CHRIS
+			//https://youtu.be/DDGpwuMAmVs?t=24s
+			r.ani = this.ani;
 
-            r.MaxCapacity = Mathf.Round(10 + (50 * (intervalMax - r.interval)));
+			r.MaxCapacity = Mathf.Round(10 + (50 * (intervalMax - r.interval)));
 
-            r.IDSNum = Random.Range(minEnemy, maxEnemy);
-            r.FIREWALLNum =Random.Range(minEnemy, maxEnemy);
-            r.ANTIVIRUSNum = Random.Range(minEnemy, maxEnemy);
+			r.IDSNum = Random.Range(minEnemy, maxEnemy);
+			r.FIREWALLNum = Random.Range(minEnemy, maxEnemy);
+			r.ANTIVIRUSNum = Random.Range(minEnemy, maxEnemy);
 
-            r.initBoard();
-            rooms.Add(go);
+			r.initBoard();
+			rooms.Add(go);
 
-            pos.x += r.getFullSize().x + 2;
+			pos.x += r.getFullSize().x + 2;
 
-            Debug.Log("Pos is: " + pos.x);
+			Debug.Log("Pos is: " + pos.x);
 
-        }
+		}
 
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            Debug.Log("Init pipes: " + i);
-            Room r = rooms.ElementAt(i).GetComponent(typeof(Room)) as Room;
-            r.initPipes();
-        }
+		for (int i = 0; i < rooms.Count; i++)
+		{
+			Debug.Log("Init pipes: " + i);
+			Room r = rooms.ElementAt(i).GetComponent(typeof(Room)) as Room;
+			r.initPipes();
+		}
 
-        for (int i = 0; i < (rooms.Count - 1); i++)
-        {
-            Debug.Log("Connct pipes: " + i + " " + (i+1));
-            Room r = rooms.ElementAt(i).GetComponent(typeof(Room)) as Room;
-            Room r2 = rooms.ElementAt(i+1).GetComponent(typeof(Room)) as Room;
-            connect_rooms(r, r2);
-        }
+		for (int i = 0; i < (rooms.Count - 1); i++)
+		{
+			Debug.Log("Connct pipes: " + i + " " + (i + 1));
+			Room r = rooms.ElementAt(i).GetComponent(typeof(Room)) as Room;
+			Room r2 = rooms.ElementAt(i + 1).GetComponent(typeof(Room)) as Room;
+			connect_rooms(r, r2);
+		}
 
-        
-        Room first_room = rooms.ElementAt(0).GetComponent(typeof(Room)) as Room;
-        Room last_room = rooms.ElementAt(rooms.Count-1).GetComponent(typeof(Room)) as Room;
-        connect_rooms(last_room, first_room);
-    }
 
-    private void connect_rooms(Room r1, Room r2)
-    {
-        r1.connectOutPipe(r2);
-        r2.connectInPipe(r1);      
-    }
+		Room first_room = rooms.ElementAt(0).GetComponent(typeof(Room)) as Room;
+		Room last_room = rooms.ElementAt(rooms.Count - 1).GetComponent(typeof(Room)) as Room;
+		connect_rooms(last_room, first_room);
+	}
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        if (allRooms != null && !stopScore) {
-            int countScore = 0;
-            foreach (Room r in allRooms) {
-                // count da rabbits
-                countScore += r.GetComponentsInChildren<SpawnController>().Length;
+	private void connect_rooms(Room r1, Room r2)
+	{
+		r1.connectOutPipe(r2);
+		r2.connectInPipe(r1);
+	}
 
-                // check for dead rooms
-                if (r.killed) {
-                    countScore += 100;
-                }
-            }
+	/// <summary>
+	/// Update is called every frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void Update()
+	{
+		if (allRooms != null && !stopScore)
+		{
+			int countScore = 0;
+			foreach (Room r in allRooms)
+			{
+				// count da rabbits
+				countScore += r.GetComponentsInChildren<SpawnController>().Length;
 
-            // got the score... update!
-            CurScore = countScore;
-        }
+				// check for dead rooms
+				if (r.killed)
+				{
+					countScore += 100;
+				}
+			}
 
-        score.text = "" + CurScore;
-        finalScore.text = "(" + CurScore + ")";
-    }
+			// got the score... update!
+			CurScore = countScore;
+		}
 
-    public void StopScore(){
-        stopScore = true;
-    }
+		score.text = "" + CurScore;
+		finalScore.text = "(" + CurScore + ")";
+	}
+
+	public void StopScore()
+	{
+		stopScore = true;
+	}
 }

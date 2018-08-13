@@ -76,8 +76,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01592506, y: -0.43529537}
-  m_Size: {x: 0.84470713, y: 0.21830603}
+  m_Offset: {x: 0.015925052, y: -0.0050586485}
+  m_Size: {x: 1.0787852, y: 1.0787852}
   m_Direction: 1
 --- !u!95 &95566768184147432
 Animator:
@@ -114,7 +114,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   health: 1
-  cooldown: 2
 --- !u!212 &212228217323999480
 SpriteRenderer:
   m_ObjectHideFlags: 1

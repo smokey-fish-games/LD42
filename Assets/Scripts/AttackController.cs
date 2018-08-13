@@ -29,17 +29,12 @@ public class AttackController : MonoBehaviour
 		Vector2 start = transform.position;
 
 		attackAnimator.SetTrigger("Active");
-		if ((start - mousePos).sqrMagnitude > attackRange)
-		{
-			Debug.Log("attack out of range");
-			return;
-		}
-
 		Vector2 end = mousePos;
 
 		// disable collider so we don't hit it whilst looking out
 		Collider2D col2d = GetComponentInParent<Collider2D>();
 		col2d.enabled = false;
+		Debug.Log("col2d is: " + col2d.enabled);
 		// check for collisions in a straight line between start and end
 		// on blockingLayer
 		RaycastHit2D hit = Physics2D.Linecast(start, end, blockingLayer);
@@ -50,11 +45,11 @@ public class AttackController : MonoBehaviour
 			Debug.Log("no enemies");
 			return;
 		}
-		Debug.Log("enemy found");
 
 		Enemy enemy = hit.transform.GetComponent<Enemy>();
 		if (enemy != null)
 		{
+			Debug.Log("hit");
 			enemy.takeDamage(1);
 		}
 	}
