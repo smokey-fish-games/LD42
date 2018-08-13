@@ -27,6 +27,8 @@ public class SpawnController : MonoBehaviour
 	float split = 10f;
 
 	bool stop = false;
+	bool halt = false;
+
 
 
 	private void Start()
@@ -40,13 +42,15 @@ public class SpawnController : MonoBehaviour
 	void FixedUpdate()
 	{
 		// move around a bit?
-		if (!stop)
+		if (!halt)
 		{
 			shouldDoMove();
+			moveFor -= Time.deltaTime;
+		}
+		if (!stop)
+		{
 			// Split?
 			shouldSplit();
-
-			moveFor -= Time.deltaTime;
 			split -= Time.deltaTime;
 		}
 	}
@@ -92,5 +96,16 @@ public class SpawnController : MonoBehaviour
 	public void stopSpawning()
 	{
 		stop = true;
+	}
+
+	public void stopMoving()
+	{
+		halt = true;
+	}
+
+	public void stopAll()
+	{
+		stop = true;
+		halt = true;
 	}
 }
