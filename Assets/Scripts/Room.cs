@@ -275,7 +275,7 @@ public class Room : MonoBehaviour
         // tell rabbits to stop
         foreach (SpawnController s in gameObject.GetComponentsInChildren<SpawnController>())
         {
-            s.stopSpawning();
+            s.stopAll();
         }
     }
 
