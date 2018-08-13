@@ -74,11 +74,13 @@ public class Room : MonoBehaviour
 			{
 
 				GameObject toInit;
+				bool wallFix = false;
 
 				if (x == -1 || x == room_size.X || y == -1 || y == room_size.Y)
 				{
 					//Debug.Log("Select wal");                               
 					toInit = wallTiles[Random.Range(0, wallTiles.Length)];
+					wallFix = true;
 				}
 				else
 				{
@@ -93,6 +95,11 @@ public class Room : MonoBehaviour
 				float posy = room_position.y + (bounds.size.y * y);
 
 				GameObject instance = Instantiate(toInit, new Vector3(posx, posy, 0f), Quaternion.identity) as GameObject;
+
+				if (wallFix){
+					float scaleFix = 1.2f;
+					instance.transform.localScale = new Vector3(scaleFix,scaleFix,scaleFix); 
+				}
 
 				instance.transform.SetParent(boardHolder);
 			}
@@ -132,6 +139,7 @@ public class Room : MonoBehaviour
 
 		input_pipe.transform.parent = transform;
 		output_pipe.transform.parent = transform;
+		input_pipe.GetComponent<SpriteRenderer>().color = Color.red;
 
 		// input_pipe.transform.SetParent(boardHolder);
 		// output_pipe.transform.SetParent(boardHolder);
