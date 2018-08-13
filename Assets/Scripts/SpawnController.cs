@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnController : MonoBehaviour {
+public class SpawnController : MonoBehaviour
+{
 
 	public float moveIntMax = 0.5f;
 	public float moveIntMin = 0.2f;
@@ -28,16 +29,19 @@ public class SpawnController : MonoBehaviour {
 	bool stop = false;
 
 
-	private void Start() {
+	private void Start()
+	{
 		sp = GetComponent<SpriteController>();
 		sp.speed = speed;
 		ani = GetComponent<Animator>();
 	}
 
 	// Update is called once per frame
-		void FixedUpdate () {
+	void FixedUpdate()
+	{
 		// move around a bit?
-		if (!stop){
+		if (!stop)
+		{
 			shouldDoMove();
 			// Split?
 			shouldSplit();
@@ -47,35 +51,46 @@ public class SpawnController : MonoBehaviour {
 		}
 	}
 
-	void shouldDoMove(){
-		if (moveFor <= 0) {
+	void shouldDoMove()
+	{
+		if (moveFor <= 0)
+		{
 			moving = !moving;
-			if (moving) {
+			if (moving)
+			{
 				moveFor = Random.Range(moveIntMin, moveIntMax);
-			}	else {
+			}
+			else
+			{
 				moveFor = Random.Range(stopMin, stopMax);
 			}
 			dirMoving = (SpriteController.DIRECTION)Random.Range(0, 7);
-			if (ani != null){
-            	ani.SetBool("moving", moving);
-        	}
+			if (ani != null)
+			{
+				ani.SetBool("moving", moving);
+			}
 		}
 
-		if(moving){
+		if (moving)
+		{
 			//move
 			sp.Move(dirMoving);
 		}
 	}
 
-	void shouldSplit(){
-		if (split <= 0) {
+	void shouldSplit()
+	{
+		if (split <= 0)
+		{
 			split = Random.Range(splitMin, splitMax);
-			GameObject newSpawn = Instantiate(spawner, transform.position,transform.rotation);
+			GameObject newSpawn = Instantiate(spawner, transform.position, transform.rotation);
+			newSpawn.layer = 0;
 			newSpawn.transform.parent = transform.parent;
 		}
 	}
 
-	public void stopSpawning(){
+	public void stopSpawning()
+	{
 		stop = true;
 	}
 }

@@ -146,11 +146,6 @@ public class Room : MonoBehaviour
 		pc.destination = destination.getOutLocation();
 		pc.parent = this;
 		pc.destination_room = destination;
-		// disable the pipe to the last level in the first room
-		if (level == 0)
-		{
-			pc.enabled = false;
-		}
 	}
 
 	public void connectOutPipe(Room destination)
@@ -216,6 +211,11 @@ public class Room : MonoBehaviour
 		foreach (PipeController p in gameObject.GetComponentsInChildren<PipeController>())
 		{
 			p.setLocked(lockedPipes);
+		}
+		// always disable the pipe from the last room in the first room
+		if (level == 0)
+		{
+			input_pipe.SetActive(false);
 		}
 	}
 
@@ -315,7 +315,7 @@ public class Room : MonoBehaviour
 			{
 				FIREWALLNum += div;
 			}
-			Debug.Log("Making " + IDSNum + " IDSSss");
+			Debug.Log("Level: " + level + ". Making " + IDSNum + " IDSSss");
 			Vector2 startPos = room_position + new Vector2(room_size.X, room_size.Y / 2);
 
 			for (int i = 0; i < IDSNum; i++)
