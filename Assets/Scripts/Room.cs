@@ -8,9 +8,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Room : MonoBehaviour
-{
-
-	public Vector2 room_position = new Vector2(0f, 0f);
+{	public Vector2 room_position = new Vector2(0f, 0f);
 	public IntVector2 room_size = new IntVector2(8, 8);
 
 	public GameObject[] floorTiles;
@@ -283,7 +281,7 @@ public class Room : MonoBehaviour
 		// tell rabbits to stop
 		foreach (SpawnController s in gameObject.GetComponentsInChildren<SpawnController>())
 		{
-			s.stopSpawning();
+			s.stopAll();
 		}
 	}
 
@@ -333,5 +331,4 @@ public class Room : MonoBehaviour
 		killed = true;
 		DisableMe();
 	}
-
 }
